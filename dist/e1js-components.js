@@ -73,8 +73,6 @@ var e1js-components =
 
 __webpack_require__(16);
 
-__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./e1js.css\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
