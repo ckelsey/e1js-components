@@ -1,6 +1,6 @@
-import "./ui-recorder"
+import "e1js"
 
-import "./e1"
+import "./ui-recorder"
 
 import "./accordian-toggle"
 import "./attribute"

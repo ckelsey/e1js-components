@@ -1,4 +1,4 @@
-import E1 from "e1js"
+const E1 = window.E1
 
 class Search {
     constructor(el) {

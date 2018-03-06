@@ -1,4 +1,4 @@
-import E1 from "../e1"
+const E1 = window.E1
 
 class E1Show {
     constructor(el) {
@@ -8,7 +8,7 @@ class E1Show {
         this.update()
     }
 
-    check(){
+    check() {
         var val = this.el.getAttribute("e1-show")
         var notBoundOrEmpty = val && val[0] !== "@" && val !== "null" && val !== "undefined" && val !== "false"
         return E1.isTruthy(this.el.getAttribute("e1-show")) || notBoundOrEmpty
@@ -17,10 +17,10 @@ class E1Show {
     update() {
         clearTimeout(this.throttle)
 
-        this.throttle = setTimeout(()=>{    
-            if(this.check()){
+        this.throttle = setTimeout(() => {
+            if (this.check()) {
                 this.el.style.removeProperty("display")
-            }else{
+            } else {
                 this.el.style.display = "none"
             }
         }, 10)

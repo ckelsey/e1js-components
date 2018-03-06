@@ -46,12 +46,12 @@ e1-icon *{
 }
 
 .svg-icon .svg-bg {
-	width: 80%;
-	height: 70%;
-	display: inline-block;
-	position: absolute;
-	background: #fff;
-	border-radius: 50%;
-	left: 10%;
-	top: 15%;
+width: 84%;
+    height: 84%;
+    display: inline-block;
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    left: 8%;
+    top: 8%;
 }

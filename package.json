@@ -1,7 +1,7 @@
 {
 	"name": "e1js-components",
 	"description": "",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"main": "dist/index.js",
 	"homepage": "https://ckelsey.github.io/e1js-components/",
 	"repository": {
@@ -55,12 +55,13 @@
 		"vinyl-source-stream": "^2.0.0",
 		"watchify": "^3.9.0",
 		"webpack": "^3.11.0",
-		"webpack-dev-server": "^2.11.1"
+		"webpack-dev-server": "^2.11.1",
+		"webpack-node-externals": "^1.6.0"
 	},
 	"scripts": {
 		"test": "nightwatch"
 	},
 	"dependencies": {
-		"e1js": "latest"
+		"e1js": "^1.0.3"
 	}
 }

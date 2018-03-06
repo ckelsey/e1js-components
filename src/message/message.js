@@ -1,4 +1,4 @@
-import E1 from "../e1"
+const E1 = window.E1
 
 class E1Message {
     constructor(el) {

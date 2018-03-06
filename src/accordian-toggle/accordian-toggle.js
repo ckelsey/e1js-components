@@ -35,6 +35,6 @@ class AccordianToggle {
     update() { }
 }
 
-import E1 from "../e1"
+const E1 = window.E1
 
 E1.registerAttribute(`e1-accordian-toggle`, AccordianToggle)

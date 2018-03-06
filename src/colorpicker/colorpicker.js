@@ -1,4 +1,4 @@
-import E1 from "../e1"
+const E1 = window.E1
 import template from "./colorpicker.html"
 
 class Colorpicker {
@@ -26,54 +26,54 @@ class Colorpicker {
         var saveButton = this.el.querySelector(".save-color")
         var cancelButton = this.el.querySelector(".cancel-color")
 
-        saveButton.addEventListener("click", ()=>{
-            if(this.picker.type.label === "HEX"){
+        saveButton.addEventListener("click", () => {
+            if (this.picker.type.label === "HEX") {
                 this.color = this.picker.values.hex
-            }else{
+            } else {
                 var start = this.picker.type.label === "HSL" ? `hsl(` : `rgb(`
                 var end = `)`
 
-                if(this.picker.values.a !== 1){
+                if (this.picker.values.a !== 1) {
                     start = this.picker.type.label === "HSL" ? `hsla(` : `rgba(`
                     end = `, ${this.picker.values.a})`
                 }
 
-                this.color = start + (this.picker.type.label === "HSL" ? `${this.picker.values.h}, ${this.picker.values.s}%, ${this.picker.values.l}%`: `${this.picker.values.r}, ${this.picker.values.g}, ${this.picker.values.b}`) + end
+                this.color = start + (this.picker.type.label === "HSL" ? `${this.picker.values.h}, ${this.picker.values.s}%, ${this.picker.values.l}%` : `${this.picker.values.r}, ${this.picker.values.g}, ${this.picker.values.b}`) + end
             }
 
-            if(!window.localStorage.getItem("ColorpickerColors")){
+            if (!window.localStorage.getItem("ColorpickerColors")) {
                 window.localStorage.setItem("ColorpickerColors", JSON.stringify([]))
             }
 
             var local = JSON.parse(window.localStorage.getItem("ColorpickerColors"))
             local.push(this.color)
 
-            if(local.length > 21){
+            if (local.length > 21) {
                 local.shift()
             }
 
             window.localStorage.setItem("ColorpickerColors", JSON.stringify(local))
-            
+
             E1.setModel(el, `color`, this.color)
             E1.setModel(null, `@ColorPickerService.previousColors`, local)
             E1.setModel(null, `@ColorPickerService.pickers.${this.picker.name}.modal.active`, false)
         })
 
-        cancelButton.addEventListener("click", ()=>{
+        cancelButton.addEventListener("click", () => {
             E1.setModel(null, `@ColorPickerService.pickers.${this.picker.name}.modal.active`, false)
-            
+
         })
 
         input.addEventListener("click", () => {
             input.blur()
             E1.setModel(null, `@ColorPickerService.pickers.${this.picker.name}.modal.active`, true)
-            
-            setTimeout(()=>{
+
+            setTimeout(() => {
                 E1.setModel(null, `@ColorPickerService.pickers.${this.picker.name}.values`, this.picker.values)
             }, 10)
         })
 
-        var handleInput = (modalInput)=>{
+        var handleInput = (modalInput) => {
             modalInput.addEventListener("input", (e) => {
                 var key = e.target.getAttribute("color")
                 var val = e.target.value
@@ -113,7 +113,7 @@ class Colorpicker {
             handleInput(modalInputs[i])
         }
 
-        E1.subscribe(`@ColorPickerService.pickers.${this.picker.name}.values`, ()=>{
+        E1.subscribe(`@ColorPickerService.pickers.${this.picker.name}.values`, () => {
             this.updateColorSample()
         })
 
@@ -121,13 +121,13 @@ class Colorpicker {
 
         E1.setModel(null, `@ColorPickerService.previousColors`, JSON.parse(window.localStorage.getItem("ColorpickerColors")) || [])
 
-        window.addEventListener("resize", ()=>{
+        window.addEventListener("resize", () => {
             E1.setModel(null, `@ColorPickerService.pickers.${this.picker.name}.values`, this.picker.values)
         })
     }
 
-    updateColorSample(){
-        if(this.el.querySelector(".color-sample")){this.el.querySelector(".color-sample").style.background = `hsla(${this.picker.values.h}, ${this.picker.values.s}%, ${this.picker.values.l}%, ${this.picker.values.a})`}
+    updateColorSample() {
+        if (this.el.querySelector(".color-sample")) { this.el.querySelector(".color-sample").style.background = `hsla(${this.picker.values.h}, ${this.picker.values.s}%, ${this.picker.values.l}%, ${this.picker.values.a})` }
     }
 
     update() {

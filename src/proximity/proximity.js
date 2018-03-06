@@ -1,4 +1,4 @@
-import E1 from "../e1"
+const E1 = window.E1
 
 class E1Proximity {
     constructor(el) {
@@ -10,8 +10,8 @@ class E1Proximity {
         this.targetDimension = "bottom"
         this.threshold = 0
         this.isInProximity = false
-        this.inProximity = () => {}
-        this.outProximity = () => {}
+        this.inProximity = () => { }
+        this.outProximity = () => { }
 
         this.update()
 
@@ -34,10 +34,10 @@ class E1Proximity {
         var dimension = this.el.getBoundingClientRect()[this.dimension]
         var proximity = dimension - targetDimension
 
-        if(proximity < this.threshold && !this.isInProximity){
+        if (proximity < this.threshold && !this.isInProximity) {
             this.isInProximity = true
             this.inProximity()
-        }else if(proximity > this.threshold && this.isInProximity){
+        } else if (proximity > this.threshold && this.isInProximity) {
             this.isInProximity = false
             this.outProximity()
         }

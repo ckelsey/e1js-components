@@ -226,6 +226,7 @@ class DemoService {
                 label: Object.keys(new E1.components["e1-icon"].service(null).templates)[0]
             },
             options: Object.keys(new E1.components["e1-icon"].service(null).templates).map((o) => {
+                console.log(o)
                 return {
                     value: o,
                     label: o

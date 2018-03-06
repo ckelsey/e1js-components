@@ -1,3 +1,4 @@
+// const nodeExternals = require('webpack-node-externals');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const cssRules = {
     fallback: 'style-loader',
@@ -8,15 +9,16 @@ const cssRules = {
 
 module.exports = {
     entry: {
-        "e1js-components": "./src/index.js",
+        "e1js-components": "./src/index.js"
     },
     target: 'web',
+    // externals: [nodeExternals()],
     output: {
         publicPath: "./",
         path: __dirname + "/dist",
         filename: "[name].js",
         libraryExport: 'umd',
-        library: "e1js-components"
+        library: "e1jsComponents"
     },
     plugins: [
         new ExtractTextPlugin({ filename: '[name].css', disable: false, allChunks: true }),

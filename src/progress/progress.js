@@ -1,4 +1,4 @@
-import E1 from "e1js"
+const E1 = window.E1
 const templates = {
     circle: require("./progress-circle.html"),
     bar: require("./progress-bar.html")

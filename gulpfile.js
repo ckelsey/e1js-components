@@ -116,8 +116,8 @@ const docs = [
 	"./demo/*.png",
 	"./demo/*.jpg",
 	"./demo/prism.js",
-	"./dist/e1js-components.js",
-	"./dist/e1js-components.css"
+	// "./dist/e1js-components.js",
+	// "./dist/e1js-components.css"
 ]
 
 gulp.task('moveDocs', function () {
@@ -134,6 +134,7 @@ gulp.task('publish', function (done) {
 			console.log(stderr);
 
 			fs.writeFile('dist/index.js', 'import "./e1js-components.js"; import "./e1js-components.css";', function () {
+
 				var pkg = require("./package.json")
 				var ver = pkg.version.split(`.`).map((num) => { return parseInt(num) })
 				var args = process.argv
@@ -174,6 +175,19 @@ gulp.task('publish', function (done) {
 					gutil.log('[webpack:build]', stats.toString({
 						colors: true
 					}));
+
+					exec('cp dist/e1js-components.js docs/e1js-components.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+					exec('cp node_modules/e1js/dist/e1js.js docs/e1js.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+					exec('cp dist/e1js-components.css docs/e1js-components.css', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
 
 					if (oldVersion === pkg.version) {
 						done()
