@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>E1</title>
+	<link rel="stylesheet" href="prism.css" />
+	<script src="prism.js"></script>
+	<!-- <link href="https://unpkg.com/mocha@4.0.1/mocha.css" rel="stylesheet" /> -->
+	<link rel="stylesheet" href="demo-styles.css" />
+	<link rel="stylesheet" href="e1js.css" />
+</head>
+
+<body>
+	<div id="header">
+		<h1>E1
+			<small> A micro library for two way bound custom elements</small>
+		</h1>
+	</div>
+	<div id="container">
+		<div id="nav">
+			<e1-dropdown label="Utility directives" list="@demoService.page.utilityDirectives"></e1-dropdown>
+			<e1-dropdown label="Prebuilt directives" list="@demoService.page.prebuiltDirectives"></e1-dropdown>
+			<!-- <div e1-accordian-toggle="tests" e1-accordian-toggle-group="main">Tests</div> -->
+		</div>
+		<div id="main-content"></div>
+	</div>
+
+
+	<!-- <e1-ui-recorder></e1-ui-recorder> -->
+
+	<script src="e1js.js"></script>
+	<script src="demo.js"></script>
+
+	<script>
+		E1.services.demoService.init()
+	</script>
+
+	<script>
+		E1.setModel(null, "@TranslationService.serviceUrl", "https://translate.cklsylabs.com")
+		E1.setModel(null, "@TranslationService.locales", [
+			"en",
+			"ru",
+			"de",
+			"zh-CN"
+		])
+	</script>
+
+</body>
+
+</html>
