@@ -20,7 +20,7 @@ class E1ShortNumber {
         var splits = str.split(".")
 
         if (splits.length > 1) {
-            str = `${splits[0].splits[1][0]}`
+            str = `${splits[0]}.${splits[1][0]}`
         }
 
         return str
