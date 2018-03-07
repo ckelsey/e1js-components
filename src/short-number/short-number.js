@@ -17,7 +17,7 @@ class E1ShortNumber {
         var i = parseInt(Math.floor(Math.log(num) / Math.log(1000)))
         var str = num / Math.pow(1000, i)
 
-        var splits = str.split(".")
+        var splits = str.toString().split(".")
 
         if (splits.length > 1) {
             str = `${splits[0]}.${splits[1][0]}`
