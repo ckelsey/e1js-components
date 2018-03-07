@@ -15,7 +15,7 @@ class E1ShortNumber {
 
         var sizes = ['', 'K', 'M', 'B', 'G']
         var i = parseInt(Math.floor(Math.log(num) / Math.log(1000)))
-        var str = (num / Math.pow(1000, i)) + sizes[i]
+        var str = num / Math.pow(1000, i)
 
         var splits = str.split(".")
 
@@ -23,7 +23,7 @@ class E1ShortNumber {
             str = `${splits[0]}.${splits[1][0]}`
         }
 
-        return str
+        return str + sizes[i]
     }
 
     update() {
