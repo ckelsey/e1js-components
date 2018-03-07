@@ -49,7 +49,7 @@ class Search {
         var val = this.value ? this.value.toString().toLowerCase() : this.value
         var onSearch = E1.getModel(this.el, "onsearch")
         var onSearchEl = this.el.onsearch
-        console.log("onSearch", onSearch, val)
+        console.log("onSearch", onSearch2, val)
         if (onSearch && typeof onSearch === "function") {
             onSearch(val)
         }
