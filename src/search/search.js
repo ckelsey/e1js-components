@@ -47,10 +47,15 @@ class Search {
 
     getResults() {
         var val = this.value ? this.value.toString().toLowerCase() : this.value
-        var onSearch = E1.getModel(this.el, "onsearch") || this.el.onsearch
+        var onSearch = E1.getModel(this.el, "onsearch")
+        var onSearchEl = this.el.onsearch
         console.log("onSearch", onSearch, val)
         if (onSearch && typeof onSearch === "function") {
             onSearch(val)
+        }
+
+        if (onSearchEl && typeof onSearchEl === "function") {
+            onSearchEl(val)
         }
 
         var reportResults = () => {
