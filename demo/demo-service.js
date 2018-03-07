@@ -295,6 +295,9 @@ class DemoService {
         this.searchPaths = "name, fruit"
         this.searchLabel = "Search"
         this.searchValue = null
+        this.onsearch = function (val) {
+            console.log("SEARCH VAL", val);
+        }
 
         this.e1Value = "<span>Hey, bound text <i>and</i>, <b>bound HTML</b></span>"
         this.e1ClassString = "blue"

@@ -50,8 +50,6 @@ class Search {
         var onSearch = E1.getModel(this.el, "onsearch")
         var onSearchEl = this.el.onsearch
 
-        console.log("onSearch2", onSearchEl, val)
-
         if (onSearch && typeof onSearch === "function") {
             onSearch(val)
         }
