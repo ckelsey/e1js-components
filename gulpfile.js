@@ -14,7 +14,6 @@ var webpack = require('webpack');
 var gutil = require('gulp-util');
 var path = require("path")
 var jshint = require('gulp-jshint')
-var WebpackDevServer = require('webpack-dev-server')
 var config = require('./webpack.config.js');
 var fs = require('fs')
 var exec = require('child_process').exec;
@@ -105,8 +104,7 @@ gulp.task('server', function () {
 		server: {
 			baseDir: "./docs/"
 		},
-		https: true,
-		port: 3004
+		https: true
 	});
 });
 

@@ -13,11 +13,17 @@ class E1ShortNumber {
             return 0
         }
 
-        var sizes = ['', 'K', 'M', 'B', 'G'];
-        var i = parseInt(Math.floor(Math.log(num) / Math.log(1000)));
-        return (num / Math.pow(1000, i)) + sizes[i];
-        // var i = (Math.log(num) / Math.log(1000)).toFixed(2)
-        // return Math.round(num / Math.pow(1000, i), 2) + ' ' + sizes[i];
+        var sizes = ['', 'K', 'M', 'B', 'G']
+        var i = parseInt(Math.floor(Math.log(num) / Math.log(1000)))
+        var str = (num / Math.pow(1000, i)) + sizes[i]
+
+        var splits = str.split(".")
+
+        if (splits.length > 1) {
+            str = `${splits[0].splits[1][0]}`
+        }
+
+        return str
     }
 
     update() {
