@@ -25,9 +25,10 @@ class E1ImageViewer {
 
         if (data.url === this.data.url ||
             data.preview === this.data.preview ||
-            data.type === this.data.type ||
-            data.crop === this.data.crop
+            data.type === this.data.type
         ) {
+            console.log();
+
             return
         }
 
