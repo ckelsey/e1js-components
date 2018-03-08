@@ -27,6 +27,8 @@ class E1ImageViewer {
         }
 
         this.throttle = setTimeout(() => {
+            console.log("E1ImageViewer", data, this.data)
+
             if (data.url === this.data.url ||
                 data.preview === this.data.preview ||
                 data.type === this.data.type ||
