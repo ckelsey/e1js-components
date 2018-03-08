@@ -1575,7 +1575,6 @@ e1-collapse.collapse [e1-collapse-content]{
     height: 0px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity .2s;
 }
 
 e1-collapse.collapse.open [e1-collapse-content]{
