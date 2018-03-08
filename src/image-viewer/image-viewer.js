@@ -14,12 +14,18 @@ class E1ImageViewer {
     update() {
 
         var data = {
-            url: E1.getModel(this.el, "url"),
-            preview: E1.getModel(this.el, "preview"),
-            type: E1.getModel(this.el, "type"),
-            crop: E1.getModel(this.el, "crop"),
+            url: E1.getModel(this.el, "url") || undefined,
+            preview: E1.getModel(this.el, "preview") || undefined,
+            type: E1.getModel(this.el, "type") || undefined,
+            crop: E1.getModel(this.el, "crop") || undefined,
             element: this.el.querySelector(".image-renderer")
         }
+
+        console.log(data.url, this.data.url);
+        console.log(data.preview, this.data.preview);
+        console.log(data.type, this.data.type);
+        console.log(data.crop, this.data.crop);
+
 
         if (data.url === this.data.url &&
             data.preview === this.data.preview &&
