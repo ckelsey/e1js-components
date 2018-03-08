@@ -117,13 +117,13 @@ class Select {
 			E1.setModel(this.el, "value", value)
 		}
 
-		// var label = this.el.querySelector(".select-menu-label")
-		// var labelText = E1.getModel(this.el, "label")
+		var label = this.el.querySelector(".select-menu-label")
+		var labelText = E1.getModel(this.el, "label")
 
-		// if (label && labelText) {
-		// 	label.innerHTML = ""
-		// 	label.appendChild(E1.cleanHtml(labelText))
-		// }
+		if (label && labelText) {
+			label.innerHTML = ""
+			label.appendChild(E1.cleanHtml(labelText))
+		}
 
 		try {
 			options = JSON.parse(options)
