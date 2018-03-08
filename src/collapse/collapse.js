@@ -7,6 +7,10 @@ class Collapse {
         this.collapse = parseFloat(E1.getModel(this.el, "collapse", 300))
         this.target = window.document.querySelector(E1.getModel(this.el, "target", `[component-id=${this.el.getAttribute("component-id")}]`))
 
+        if (this.target.getBoundingClientRect().width < this.collapse) {
+            this.el.classList.add("collapse")
+        }
+
         this.toggle = this.el.querySelector('[e1-collapse-toggle]')
         this.content = this.el.querySelector('[e1-collapse-content]')
 
