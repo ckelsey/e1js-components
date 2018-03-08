@@ -28,7 +28,6 @@ class E1If {
     }
 
     update() {
-        console.log("UP")
         clearTimeout(this.throttle)
 
         this.throttle = setTimeout(() => {
