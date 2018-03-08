@@ -31,7 +31,6 @@ class E1If {
         clearTimeout(this.throttle)
 
         this.throttle = setTimeout(() => {
-            var self = this
             this.check((check) => {
                 if (check && !this.el.parentNode) {
                     this.parentNode.insertBefore(this.el, this.comment);

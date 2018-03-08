@@ -44,7 +44,7 @@ class E1Proximity {
     }
 
     update() {
-        var dimensionOtions = ["top", "bottom", "left", "right"]
+        var dimensionOptions = ["top", "bottom", "left", "right"]
         var dimension = E1.getModel(this.el, "e1-proximity")
         var target = E1.getModel(this.el, "e1-proximity-target")
         var targetDimension = E1.getModel(this.el, "e1-proximity-target-dimension")
@@ -54,11 +54,11 @@ class E1Proximity {
             this.threshold = parseFloat(threshold)
         }
 
-        if (dimension && dimensionOtions.indexOf(dimension.toLowerCase())) {
+        if (dimension && dimensionOptions.indexOf(dimension.toLowerCase())) {
             this.dimension = dimension.toLowerCase()
         }
 
-        if (targetDimension && dimensionOtions.indexOf(targetDimension.toLowerCase())) {
+        if (targetDimension && dimensionOptions.indexOf(targetDimension.toLowerCase())) {
             this.targetDimension = targetDimension.toLowerCase()
         }
 

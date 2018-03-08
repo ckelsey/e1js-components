@@ -8,6 +8,8 @@ class E1ImageViewer {
         this.update = this.update
         this.throttle = null
 
+        this.data = {}
+
         this.el.innerHTML = '<span class="image-renderer"></span>'
         this.el.renderer = false
         this.update()
@@ -16,21 +18,31 @@ class E1ImageViewer {
     update() {
         clearTimeout(this.throttle)
 
-        this.throttle = setTimeout(() => {
-            if (this.el.renderer) {
-                this.el.renderer.destroy()
-            }
+        var data = {
+            url: E1.getModel(this.el, "url"),
+            preview: E1.getModel(this.el, "preview"),
+            type: E1.getModel(this.el, "type"),
+            crop: E1.getModel(this.el, "crop"),
+            element: this.el.querySelector(".image-renderer")
+        }
 
-            var data = {
-                url: E1.getModel(this.el, "url"),
-                preview: E1.getModel(this.el, "preview"),
-                type: E1.getModel(this.el, "type"),
-                crop: E1.getModel(this.el, "crop"),
-                element: this.el.querySelector(".image-renderer")
+        this.throttle = setTimeout(() => {
+            if (data.url === this.data.url ||
+                data.preview === this.data.preview ||
+                data.type === this.data.type ||
+                data.crop === this.data.crop
+            ) {
+                return
             }
 
             if (!data.url) {
                 return
+            }
+
+            this.data = data
+
+            if (this.el.renderer) {
+                this.el.renderer.destroy()
             }
 
             this.el.renderer = new ImageRenderer(data)
