@@ -34,6 +34,9 @@ class E1ImageViewer {
             return
         }
 
+        console.log("DO IT! YEAH");
+
+
         this.data = data
 
         if (this.el.renderer) {
