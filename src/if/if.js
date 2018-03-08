@@ -9,30 +9,37 @@ class E1If {
         this.comment = window.document.createComment(this.el.getAttribute("component-id"))
         this.parentNode.insertBefore(this.comment, this.el);
 
-        if (!this.check()) {
-            this.parentNode.removeChild(this.el)
-        }
+        this.check((check) => {
+            if (!check && this.parentNode.contains(this.el)) {
+                this.parentNode.removeChild(this.el)
+            }
+        })
 
         this.throttle = null
     }
 
-    check() {
+    check(cb) {
         var val = this.el.getAttribute("e1-if")
         var notBoundOrEmpty = val && val[0] !== "@" && val !== "null" && val !== "undefined" && val !== "false"
-        return E1.isTruthy(this.el.getAttribute("e1-if")) || notBoundOrEmpty
+
+        E1.isTruthy(this.el.getAttribute("e1-if"), function (truthy) {
+            cb(truthy || notBoundOrEmpty)
+        })
     }
 
     update() {
+        console.log("UP")
         clearTimeout(this.throttle)
 
         this.throttle = setTimeout(() => {
-            var check = this.check()
-
-            if (check && !this.el.parentNode) {
-                this.parentNode.insertBefore(this.el, this.comment);
-            } else if (!check && this.parentNode.contains(this.el)) {
-                this.parentNode.removeChild(this.el)
-            }
+            var self = this
+            this.check((check) => {
+                if (check && !this.el.parentNode) {
+                    this.parentNode.insertBefore(this.el, this.comment);
+                } else if (!check && this.parentNode.contains(this.el)) {
+                    this.parentNode.removeChild(this.el)
+                }
+            })
         }, 10)
     }
 }

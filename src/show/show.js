@@ -8,21 +8,26 @@ class E1Show {
         this.update()
     }
 
-    check() {
+    check(cb) {
         var val = this.el.getAttribute("e1-show")
         var notBoundOrEmpty = val && val[0] !== "@" && val !== "null" && val !== "undefined" && val !== "false"
-        return E1.isTruthy(this.el.getAttribute("e1-show")) || notBoundOrEmpty
+
+        E1.isTruthy(this.el.getAttribute("e1-show"), (truthy) => {
+            cb(truthy || notBoundOrEmpty)
+        })
     }
 
     update() {
         clearTimeout(this.throttle)
 
         this.throttle = setTimeout(() => {
-            if (this.check()) {
-                this.el.style.removeProperty("display")
-            } else {
-                this.el.style.display = "none"
-            }
+            this.check((truthy) => {
+                if (truthy) {
+                    this.el.style.removeProperty("display")
+                } else {
+                    this.el.style.display = "none"
+                }
+            })
         }, 10)
     }
 }
