@@ -1,7 +1,7 @@
 {
 	"name": "e1js-components",
 	"description": "",
-	"version": "1.0.20",
+	"version": "1.0.21",
 	"main": "dist/index.js",
 	"homepage": "https://ckelsey.github.io/e1js-components/",
 	"repository": {
@@ -62,6 +62,6 @@
 		"test": "nightwatch"
 	},
 	"dependencies": {
-		"e1js": "^1.0.3"
+		"e1js": "latest"
 	}
 }
