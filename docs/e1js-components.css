@@ -1572,7 +1572,7 @@ e1-collapse.collapse [e1-collapse-toggle]{
 }
 
 e1-collapse.collapse [e1-collapse-content]{
-    position: absolute;
+    height: 0px;
     opacity: 0;
     pointer-events: none;
     transition: opacity .2s;
@@ -1581,6 +1581,7 @@ e1-collapse.collapse [e1-collapse-content]{
 e1-collapse.collapse.open [e1-collapse-content]{
     opacity: 1;
     pointer-events: all;
+    height: auto;
 }[e1-accordian-toggle]{
     padding: 7px 14px 7px 21px;
     display: inline-block;
