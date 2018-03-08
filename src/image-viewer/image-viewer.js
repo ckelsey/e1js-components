@@ -21,14 +21,12 @@ class E1ImageViewer {
             element: this.el.querySelector(".image-renderer")
         }
 
-        console.log("E1ImageViewer", data, this.data)
-
-        if (data.url === this.data.url ||
-            data.preview === this.data.preview ||
-            data.type === this.data.type
+        if (data.url === this.data.url &&
+            data.preview === this.data.preview &&
+            data.type === this.data.type &&
+            data.crop === this.data.crop
         ) {
-            console.log();
-
+            console.log("aawww");
             return
         }
 
