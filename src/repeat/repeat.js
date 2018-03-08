@@ -15,7 +15,7 @@ class E1Repeat {
 
         if (model && model.length) {
             model.forEach((item, key) => {
-                var html = this.template.split(this.el.getAttribute("delimiter")).join(key)
+                var html = this.template.split(this.el.getAttribute("delimiter")).join(key).split(this.el.getAttribute("repeater-value")).join(item)
                 this.el.innerHTML += html
             })
         }
