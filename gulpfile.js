@@ -19,7 +19,7 @@ var fs = require('fs')
 var exec = require('child_process').exec;
 
 var paths = {
-	watch: ["./src/*,", "./src/**/*", "./demo/*", "./e2e/*"],
+	watch: ["./src/*,", "./src/**/*", "./demo/*", "./e2e/*", "./node_modules/e1js/dist/*"],
 	jshint: ["src/*.js,", "src/**/*.js"]
 }
 

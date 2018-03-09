@@ -17,7 +17,7 @@ class Search {
             this.paths = this.paths.split(",").map(function (path) { return path.trim() })
         }
 
-        this.el.innerHTML = `<div class="search"><input type="text" placeholder="${this.placeholder}" /><button class="search-button"><span style="color:transparent !important; pointer-events:none;">W</span><e1-icon type="search"></e1-icon></button><button e1-if="${el.getAttribute("value")}" class="cancel-search-button"><span style="color:transparent !important; pointer-events:none;">W</span><e1-icon type="close-thin"></e1-icon></button></div>`
+        this.el.innerHTML = `<div class="search"><input type="text" placeholder="${this.placeholder}" /><button class="search-button"><span style="color:transparent !important; pointer-events:none;">W</span><e1-icon type="search"></e1-icon></button><button e1-show="${el.getAttribute("value")}" class="cancel-search-button"><span style="color:transparent !important; pointer-events:none;">W</span><e1-icon type="close-thin"></e1-icon></button></div>`
 
         this.el.querySelector(".search-button").addEventListener("click", () => {
             this.getResults()

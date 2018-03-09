@@ -3,7 +3,7 @@ const E1 = window.E1
 class E1Style {
     constructor(el) {
         this.el = el
-        this.el["e1-if-style"] = this.update
+        this.el["e1-style-update"] = this.update
         this.setStyles()
     }
 

@@ -7,7 +7,7 @@ class Select {
 
 		var html = `
         <div class="select-container">
-			<span class="select-menu-label" e1-if="${el.getAttribute("label")}"></span>
+			<span class="select-menu-label" e1-show="${el.getAttribute("label")}"></span>
 			<input readonly tabindex="-1" type="text" class="select-menu-selected-text" e1-value="${el.getAttribute("value") + ".label"}">
 			<span class="select-menu-options"></span>
 			<button class="select-menu-arrow"><span style="color:transparent !important; pointer-events:none;">V</span></button>

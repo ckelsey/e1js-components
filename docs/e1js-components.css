@@ -535,15 +535,10 @@ e1-modal .modal .modal-wrapper .modal-close:hover {
 	background-position: 50% 50%;
 	user-select: none;
 	z-index: 1;
-	overflow: hidden;
 }
 
 e1-image-viewer * {
 	user-select: none;
-}
-
-e1-image-viewer.flat-render {
-	overflow: hidden;
 }
 
 e1-image-viewer.flat-render canvas {
@@ -910,7 +905,6 @@ e1-image-viewer .zoom-controls:hover .zoom-range-handle, e1-image-viewer .zoom-c
 
 .image-renderer {
 	display: block;
-	overflow: hidden;
 	width: 100%;
 	height: 100%;
 	background: #1c1c1c;
