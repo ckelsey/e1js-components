@@ -28,23 +28,8 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 	class ImageRenderer {
 		constructor(data) {
 			var self = this
-			var doKeyPress = (e) => {
-				self.keyDown(self, e)
-			}
-
-			var doFullscreenChange = () => {
-				if (self.isFullscreen()) {
-					self.exitFullscreen()
-				}
-			}
 
 			this.destroy = () => {
-				window.removeEventListener('keydown', doKeyPress, false)
-				window.document.removeEventListener('webkitfullscreenchange', doFullscreenChange, false);
-				window.document.removeEventListener('mozfullscreenchange', doFullscreenChange, false);
-				window.document.removeEventListener('fullscreenchange', doFullscreenChange, false);
-				window.document.removeEventListener('MSFullscreenChange', doFullscreenChange, false);
-
 				if (this.renderer) {
 					this.renderer.destroy()
 				}
@@ -70,13 +55,6 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 			if (this.data.crop) {
 				this.data.cropper = new Cropper(this.data)
 			}
-
-			window.addEventListener('keydown', doKeyPress, false)
-
-			window.document.addEventListener('webkitfullscreenchange', doFullscreenChange, false);
-			window.document.addEventListener('mozfullscreenchange', doFullscreenChange, false);
-			window.document.addEventListener('fullscreenchange', doFullscreenChange, false);
-			window.document.addEventListener('MSFullscreenChange', doFullscreenChange, false);
 		}
 
 		download() {
@@ -126,24 +104,12 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 		}
 
 		toggleFullscreen() {
+			this.fullscreenToggledByButton = true
 
-			if (this.isFullscreen()) {
+			if (this.fullscreen) {
 				this.exitFullscreen()
 			} else {
 				this.enterFullscreen()
-			}
-
-			this.fullscreen = !this.fullscreen
-
-			// var iOS = !!window.navigator.platform && /iPad|iPhone|iPod/.test(window.navigator.platform);
-			// if (iOS) {
-			// 	this.fullscreen = !this.fullscreen
-			// }
-		}
-
-		keyDown(self, e) {
-			if ((e.key.toLowerCase() === 'escape' || e.key.toLowerCase() === 'esc' || e.keyCode === 27)) {
-				self.exitFullscreen()
 			}
 		}
 
@@ -180,12 +146,11 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 
 		createControls(options) {
 			var self = this
-			var exitHandler = () => {
+			var fullscreenChange = () => {
 				self.fullscreen = !self.fullscreen
 
 				if (!self.fullscreen) {
-					var canvasWrapper = self.data.element;
-					canvasWrapper.classList.remove("fullscreen");
+					self.exitFullscreen()
 
 					if (options.onExitFullscreen) {
 						options.onExitFullscreen(options.self)
@@ -198,9 +163,10 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 			var zoomControlsWrapper
 
 			if (buttonWrapper && buttonWrapper.length) {
-				for (var b = 0; b < buttonWrapper.length; b++) {
-					buttonWrapper[b].parentNode.removeChild(buttonWrapper[b])
-				}
+				return
+				// for (var b = 0; b < buttonWrapper.length; b++) {
+				// 	buttonWrapper[b].parentNode.removeChild(buttonWrapper[b])
+				// }
 			}
 
 			buttonWrapper = window.document.createElement("div");
@@ -253,10 +219,10 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 			}
 
 			if (fullscreen) {
-				window.document.removeEventListener('webkitfullscreenchange', exitHandler, false);
-				window.document.removeEventListener('mozfullscreenchange', exitHandler, false);
-				window.document.removeEventListener('fullscreenchange', exitHandler, false);
-				window.document.removeEventListener('MSFullscreenChange', exitHandler, false);
+				window.document.removeEventListener('webkitfullscreenchange', fullscreenChange, false);
+				window.document.removeEventListener('mozfullscreenchange', fullscreenChange, false);
+				window.document.removeEventListener('fullscreenchange', fullscreenChange, false);
+				window.document.removeEventListener('MSFullscreenChange', fullscreenChange, false);
 
 				var fullscreenButton = window.document.createElement("button");
 				fullscreenButton.className = "fullscreen-button"
@@ -264,10 +230,10 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 				fullscreenButton.addEventListener('click', fullscreen.bind(options.self), false);
 				buttonWrapper.appendChild(fullscreenButton);
 
-				window.document.addEventListener('webkitfullscreenchange', exitHandler, false);
-				window.document.addEventListener('mozfullscreenchange', exitHandler, false);
-				window.document.addEventListener('fullscreenchange', exitHandler, false);
-				window.document.addEventListener('MSFullscreenChange', exitHandler, false);
+				window.document.addEventListener('webkitfullscreenchange', fullscreenChange, false);
+				window.document.addEventListener('mozfullscreenchange', fullscreenChange, false);
+				window.document.addEventListener('fullscreenchange', fullscreenChange, false);
+				window.document.addEventListener('MSFullscreenChange', fullscreenChange, false);
 			}
 
 			if (zoom) {

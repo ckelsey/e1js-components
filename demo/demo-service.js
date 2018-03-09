@@ -110,7 +110,7 @@ class DemoService {
             type: "",
             url: "",
             preview: "",
-            crop: true,
+            crop: false,
             options: [{
                 label: "Super resolution",
                 preview: "https://images.nvidia.com/ansel/images/ansel-images/Y2tsc3l0ZXN0ZXIyMTUwNzEyNjE4OTYzMjMzMTI1ODky_small.jpg",

@@ -121,7 +121,7 @@
 
 		toggleVr() {
 			if (this.is3D && this.canDoVR) {
-				if (this.data.instance.isFullscreen()) {
+				if (this.data.instance.fullscreen) {
 					this.activeCache = this.cache
 					this.setCanvasImage(this.cache)
 					this.zoomMin = this.getMinZoom(this.cache.width, this.cache.height)
@@ -146,7 +146,7 @@
 
 		onExitFullscreen(self) {
 			setTimeout(() => {
-				self.zoom = self.zoomMin
+				// self.zoom = self.zoomMin
 				self.setTransforms()
 			}, 200)
 		}

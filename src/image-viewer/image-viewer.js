@@ -21,27 +21,17 @@ class E1ImageViewer {
             element: this.el.querySelector(".image-renderer")
         }
 
-        console.log(data.url, this.data.url);
-        console.log(data.preview, this.data.preview);
-        console.log(data.type, this.data.type);
-        console.log(data.crop, this.data.crop);
-
-
         if (data.url === this.data.url &&
             data.preview === this.data.preview &&
             data.type === this.data.type &&
             data.crop === this.data.crop
         ) {
-            console.log("aawww");
             return
         }
 
         if (!data.url) {
             return
         }
-
-        console.log("DO IT! YEAH");
-
 
         this.data = data
 
