@@ -27,8 +27,6 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 
 	class ImageRenderer {
 		constructor(data) {
-			var self = this
-
 			this.destroy = () => {
 				if (this.renderer) {
 					this.renderer.destroy()

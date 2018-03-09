@@ -281,7 +281,6 @@
 				})
 				this.hasLoadedControls = true
 				this.ready = true
-				window.E1.scan(this.canvasWrapper)
 				return
 			}
 

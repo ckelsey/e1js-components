@@ -114,6 +114,7 @@ const docs = [
 	"./demo/*.png",
 	"./demo/*.jpg",
 	"./demo/prism.js",
+	"./demo/image-renderer-lib.js",
 	// "./dist/e1js-components.js",
 	// "./dist/e1js-components.css"
 ]
@@ -174,6 +175,10 @@ gulp.task('publish', function (done) {
 						colors: true
 					}));
 
+					exec('cp demo/image-renderer-lib.js dist/image-renderer-lib.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
 					exec('cp dist/e1js-components.js docs/e1js-components.js', function (err, stdout, stderr) {
 						console.log(stdout);
 						console.log(stderr);
