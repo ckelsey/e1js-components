@@ -9,6 +9,7 @@ class Edit {
             editing: false,
             value: this.stripHtml(E1.getModel(this.el, "content")),
             save: E1.getModel(this.el, "save"),
+            saveProp: this.el.save
         }
 
         E1.setModel(null, `@E1EditService.editors.${this.editor.name}`, this.editor)
@@ -42,7 +43,16 @@ class Edit {
         this.el.querySelector(".edit-content").addEventListener("keypress", (e) => {
             if (e.key && e.key.toLowerCase() === "enter") {
                 E1.setModel(null, `@E1EditService.editors.${this.editor.name}.editing`, false)
+                E1.setModel(this.el, "content", this.el.querySelector(".edit-content").textContent)
                 this.el.querySelector(".edit-content").removeAttribute("contenteditable")
+
+                if (typeof this.editor.save === "function") {
+                    this.editor.save(this.el.querySelector(".edit-content").textContent)
+                }
+
+                if (typeof this.editor.saveProp === "function") {
+                    this.editor.saveProp(this.el.querySelector(".edit-content").textContent)
+                }
             }
         })
 
@@ -58,6 +68,10 @@ class Edit {
 
             if (typeof this.editor.save === "function") {
                 this.editor.save(this.el.querySelector(".edit-content").textContent)
+            }
+
+            if (typeof this.editor.saveProp === "function") {
+                this.editor.saveProp(this.el.querySelector(".edit-content").textContent)
             }
         })
 
