@@ -296,7 +296,85 @@ class Icon {
     }
 
     update() {
-        if (this.el) { this.el.innerHTML = `<span class="svg-icon"><span class="svg-icon-inner">${this.templates[E1.getModel(this.el, "type")]}</span></span>` }
+        if (this.el && this.el.parentNode) { 
+            var type = E1.getModel(this.el, `type`)
+            var template = this.templates[type]
+
+            if (!template) {
+                return
+            }
+
+            var toCanvas = E1.getModel(this.el, `canvas`)
+            var width = E1.getModel(this.el, `width`)
+            var height = E1.getModel(this.el, `height`)
+
+            if(height){
+                this.el.style.width = this.el.style.height = height
+            } else if (width) {
+                this.el.style.width = this.el.style.height = width
+            }
+            
+            this.el.innerHTML = ``
+
+            if(toCanvas){
+                var temp = window.document.createElement('div')
+                temp.appendChild(E1.cleanHtml(`<div>${template}</div>`))
+                
+                var svg = temp.querySelector(`svg`)
+                var BG = temp.querySelector(`.svg-bg`)
+                var color = window.getComputedStyle(this.el).getPropertyValue(`color`)
+
+                if (svg.classList.contains(`filled-svg`) && !svg.style.fill){
+                    svg.style.fill = color
+                } else if (svg.classList.contains(`fill`) && !svg.style.fill){
+                    svg.style.fill = color
+                    svg.style.stroke = color
+                    svg.style.strokeWidth = `21px`
+                }else if(!BG) {
+                    svg.style.fill = `transparent`
+                    svg.style.stroke = color
+                    svg.style.strokeWidth = `21px`
+                }
+
+                var svgString = new XMLSerializer().serializeToString(svg)
+                var blob = new Blob([svgString], { type: `image/svg+xml;charset=utf-8` })
+                var url = window.URL.createObjectURL(blob)
+                var img = new window.Image()
+                var ctx = window.document.createElement(`canvas`).getContext(`2d`)
+                img.width = img.height = ctx.canvas.width = ctx.canvas.height = this.el.getBoundingClientRect().width * window.devicePixelRatio
+                ctx.canvas.style.width = ctx.canvas.style.height = `100%`
+
+                
+
+                img.onload = e =>{
+
+                    if (BG) {
+                        var centerX = ctx.canvas.width / 2
+                        var centerY = ctx.canvas.height / 2
+                        var radius = centerX * 0.8
+
+                        ctx.save()
+                        ctx.beginPath()
+                        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false)
+                        ctx.fillStyle = `#fff`
+                        ctx.fill()
+                        
+                        ctx.closePath()
+                    }
+
+                    ctx.drawImage(img, ctx.canvas.width / 2 - img.width / 2, ctx.canvas.height / 2 - img.height / 2)
+
+                    this.el.appendChild(E1.cleanHtml(`<span class="svg-icon"><span class="svg-icon-inner"></span></span>`))
+
+                    this.el.querySelector(`.svg-icon-inner`).appendChild(ctx.canvas)
+                    window.URL.revokeObjectURL(url)
+                }
+
+                img.src = url
+            }else{
+                this.el.appendChild(E1.cleanHtml(`<span class="svg-icon"><span class="svg-icon-inner">${this.templates[type]}</span></span>`))
+            }
+        }
     }
 }
 
