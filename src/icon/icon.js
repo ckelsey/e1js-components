@@ -368,6 +368,7 @@ class Icon {
 
                     this.el.querySelector(`.svg-icon-inner`).appendChild(ctx.canvas)
                     window.URL.revokeObjectURL(url)
+                    template = url = blob = img = svg = temp = svgString = undefined
                 }
 
                 img.src = url
