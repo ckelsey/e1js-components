@@ -1,3 +1,28 @@
+@font-face {
+    font-family: 'e1 icon';
+    src: url('https://d2r8hlo5b46azr.cloudfront.net/e1-icon.eot');
+    src: url('https://d2r8hlo5b46azr.cloudfront.net/e1-icon.eot?#iefix') format('embedded-opentype'),
+         url('https://d2r8hlo5b46azr.cloudfront.net/e1-icon.woff') format('woff'),
+         url('https://d2r8hlo5b46azr.cloudfront.net/e1-icon.ttf') format('truetype'),
+         url('https://d2r8hlo5b46azr.cloudfront.net/e1-icon.svg#e1-icon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+[class*='e1-font-icon-']:before{
+	display: inline-block;
+   font-family: 'e1 icon';
+   font-style: normal;
+   font-weight: normal;
+   line-height: 1;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale
+}
+.e1-font-icon-vr:before{content:'\0041';}
+.e1-font-icon-360:before{content:'\0042';}
+.e1-font-icon-binocs:before{content:'\0043';}
+.e1-font-icon-heart-outline:before{content:'\0044';}
+.e1-font-icon-heart:before{content:'\0045';}
+
 e1-icon{
 	display: inline-block;
 	width: 100%;
