@@ -1,1 +1,1 @@
-import "./e1js-components.js"; import "./e1js-components.css";
+import "./fonts/e1-icon.eot"; import "./fonts/e1-icon.svg"; import "./fonts/e1-icon.ttf"; import "./fonts/e1-icon.woff"; import "./e1js-components.js"; import "./e1js-components.css";

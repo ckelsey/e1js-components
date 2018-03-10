@@ -132,7 +132,7 @@ gulp.task('publish', function (done) {
 			console.log(stdout);
 			console.log(stderr);
 
-			fs.writeFile('dist/index.js', 'import "./e1js-components.js"; import "./e1js-components.css";', function () {
+			fs.writeFile('dist/index.js', 'import "./fonts/e1-icon.eot"; import "./fonts/e1-icon.svg"; import "./fonts/e1-icon.ttf"; import "./fonts/e1-icon.woff"; import "./e1js-components.js"; import "./e1js-components.css";', function () {
 
 				var pkg = require("./package.json")
 				var ver = pkg.version.split(`.`).map((num) => { return parseInt(num) })
