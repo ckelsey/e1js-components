@@ -1,2 +1,6 @@
 import "./icon"
 import "./icon.css"
+import "./fonts/e1-icon.eot"
+import "./fonts/e1-icon.svg"
+import "./fonts/e1-icon.ttf"
+import "./fonts/e1-icon.woff"
