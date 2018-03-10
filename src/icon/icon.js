@@ -302,15 +302,14 @@ class Icon {
         if (this.el && this.el.parentNode) { 
             var type = E1.getModel(this.el, `type`)
             var template = this.templates[type]
-
-            if (!template) {
-                return
-            }
-
             var toCanvas = E1.getModel(this.el, `canvas`)
             var toFont = E1.getModel(this.el, `font`)
             var width = E1.getModel(this.el, `width`)
             var height = E1.getModel(this.el, `height`)
+
+            if (!template && !toFont) {
+                return
+            }
 
             if(height){
                 this.el.style.width = this.el.style.height = height
