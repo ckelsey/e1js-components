@@ -308,6 +308,7 @@ class RendererVR {
 
 			if (!this.hasLoadedControls) {
 				this.data.instance.createControls({
+					fullscreen: this.fullscreen,
 					vr: this.present,
 					self: this
 				})

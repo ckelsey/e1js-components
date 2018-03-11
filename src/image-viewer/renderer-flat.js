@@ -154,9 +154,7 @@ class RendererFlat {
 
 	toggleFullscreen() {		
 		this.data.instance.toggleFullscreen();
-		window.requestAnimationFrame(()=>{
-			this.setTransforms()
-		})
+		
 		window.setTimeout(() => {
 			this.setTransforms()
 		}, 200)
