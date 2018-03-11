@@ -57,6 +57,12 @@ class E1ImageViewer {
             if (this.el.onready && typeof this.el.onready === "function") {
                 this.el.onready()
             }
+
+            var imageReady = E1.getModel(this.el, "image-ready")
+
+            if (imageReady && typeof imageReady === "function") {
+                imageReady()
+            }
         }
     }
 }
