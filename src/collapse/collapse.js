@@ -31,17 +31,10 @@ class Collapse {
         this.el.appendChild(this.content)
 
         var self = this
-        var isMobile = /iPad|iPhone|iPod|Android/.test(window.navigator.userAgent)
-
-        var click = () => {
-            self.el.classList.toggle("open")
-        }
-
-        if (isMobile) {
-            this.toggle.addEventListener("touch", click)
-        } else {
-            this.toggle.addEventListener("click", click)
-        }
+        
+        this.toggle.addEventListener("click", ()=>{
+            this.el.classList.toggle("open")
+        })
 
         var next = () => {
             self.check()
