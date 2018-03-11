@@ -22,7 +22,6 @@ class ImageUtils {
 		var progressBar = window.document.createElement("e1-progress");
 		progressBar.setAttribute(`type`, `circle`)
 		progressBar.setAttribute(`progress`, `@ProgressService.progress`)
-		// progressBar.classList.add("renderer-progressbar");
 		progressBarWrapper.appendChild(progressBar)
 		data.element.appendChild(progressBarWrapper);
 
@@ -31,37 +30,26 @@ class ImageUtils {
 				(mainimg) => {
 					progressBar.style.opacity = 0;
 
-					setTimeout(() => {
-						// var _p = window.document.querySelectorAll(".renderer-progressbar")
-						// if (_p) {
-						// 	for (var p = 0; p < _p.length; p++) {
-						// 		data.element.removeChild(_p[p]);
-						// 	}
-						// }
-					}, 600);
-
 					mainCB(mainimg)
+
+					if (!data.preview && data.instance.previewReady && typeof data.instance.previewReady === `function`) {
+						data.instance.previewReady()
+					}
 				},
 				(prog) => {
 					data.instance.stats.previewProgress = prog
-					// progressBar.style.width = prog + "%"
 					E1.setModel(null, `@ProgressService.progress`, prog)
 					data.instance.trigger("statsUpdate", data.instance.stats)
 				},
 				(err) => {
 					progressBar.style.opacity = 0;
 
-					setTimeout(() => {
-						// var _p = window.document.querySelectorAll(".renderer-progressbar")
-						// if (_p) {
-						// 	for (var p = 0; p < _p.length; p++) {
-						// 		data.element.removeChild(_p[p]);
-						// 	}
-						// }
-					}, 600);
-
 					if (errCB) {
 						errCB(err)
+					}
+
+					if (!data.preview && data.instance.previewReady && typeof data.instance.previewReady === `function`) {
+						data.instance.previewReady()
 					}
 				}
 			);
@@ -72,10 +60,11 @@ class ImageUtils {
 				prevCB(previmg)
 				data.instance.stats.previewProgress = 100
 				loadMain()
+				if (data.instance.previewReady && typeof data.instance.previewReady === `function`) {
+					data.instance.previewReady()
+				}
 			}, (prog) => {
 				data.instance.stats.previewProgress = prog
-				// progressBar.style.width = prog + "%"
-				// E1.setModel(null, `@ProgressService.progress`, prog)
 				data.instance.trigger("statsUpdate", data.instance.stats)
 			}, () => {
 				if (data.instance.previewReady && typeof data.instance.previewReady === `function`){

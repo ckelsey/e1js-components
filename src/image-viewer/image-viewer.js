@@ -53,6 +53,7 @@ class E1ImageViewer {
         }
 
         this.el.renderer.previewReady = () => {
+            console.log("READY")
             if (this.el.onready && typeof this.el.onready === "function") {
                 this.el.onready()
             }
