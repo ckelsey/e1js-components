@@ -1,2 +1,2 @@
-require("./image-viewer")
-require("./image-viewer.css")
+import "./image-viewer"
+import "./image-viewer.css"

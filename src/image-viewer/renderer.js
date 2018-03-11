@@ -19,260 +19,260 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 }
 
 
-(function () {
-	var Utils = require("./utils")
-	var RendererFlat = require("./renderer-flat")
-	var Renderer360 = require("./renderer-360")
-	var Cropper = require("./cropper")
 
-	class ImageRenderer {
-		constructor(data) {
-			this.destroy = () => {
-				if (this.renderer) {
-					this.renderer.destroy()
-				}
-			}
+import Utils from "./utils"
+var RendererFlat = require("./renderer-flat")
+var Renderer360 = require("./renderer-360")
+var Cropper = require("./cropper")
 
-			this.destroy()
-
-			this.data = data
-			this.data.instance = this
-			this.stats = {}
-			this.subscriptions = {}
-			this.utils = Utils
-			this.showControls = this.data.crop ? false : true
-			this.fullscreen = false
-
-			if (!this.data.type || this.data.type.indexOf("360") === -1) {
-				this.renderer = new RendererFlat(this.data)
-			} else {
-				this.renderer = new Renderer360(this.data)
-			}
-
-
-			if (this.data.crop) {
-				this.data.cropper = new Cropper(this.data)
+class ImageRenderer {
+	constructor(data) {
+		this.destroy = () => {
+			if (this.renderer) {
+				this.renderer.destroy()
 			}
 		}
 
-		download() {
-			var canvas = this.data.element.querySelector("canvas")
-			canvas.toBlob((file) => {
+		this.destroy()
 
-				var a = window.document.createElement("a")
-				a.download = true
-				a.href = window.URL.createObjectURL(file)
-				a.click()
+		this.data = data
+		this.data.instance = this
+		this.stats = {}
+		this.subscriptions = {}
+		this.utils = Utils
+		this.showControls = this.data.crop ? false : true
+		this.fullscreen = false
 
-			})
+		if (!this.data.type || this.data.type.indexOf("360") === -1) {
+			this.renderer = new RendererFlat(this.data)
+		} else {
+			this.renderer = new Renderer360(this.data)
 		}
 
-		isFullscreen() {
-			return this.fullscreen
-		}
 
-		exitFullscreen() {
-			var canvasWrapper = this.data.element;
-			canvasWrapper.parentNode.classList.remove("fullscreen");
-
-			if (window.document.exitFullscreen) {
-				window.document.exitFullscreen();
-			} else if (window.document.webkitExitFullscreen) {
-				window.document.webkitExitFullscreen();
-			} else if (window.document.mozCancelFullScreen) {
-				window.document.mozCancelFullScreen();
-			} else if (window.document.msExitFullscreen) {
-				window.document.msExitFullscreen();
-			}
-		}
-
-		enterFullscreen() {
-			var canvasWrapper = this.data.element;
-			canvasWrapper.parentNode.classList.add("fullscreen");
-
-			if (canvasWrapper.requestFullscreen) {
-				canvasWrapper.requestFullscreen();
-			} else if (canvasWrapper.webkitRequestFullscreen) {
-				canvasWrapper.webkitRequestFullscreen();
-			} else if (canvasWrapper.mozRequestFullScreen) {
-				canvasWrapper.mozRequestFullScreen();
-			} else if (canvasWrapper.msRequestFullscreen) {
-				canvasWrapper.msRequestFullscreen();
-			}
-		}
-
-		toggleFullscreen() {
-			this.fullscreenToggledByButton = true
-
-			if (this.fullscreen) {
-				this.exitFullscreen()
-			} else {
-				this.enterFullscreen()
-			}
-		}
-
-		subscribe(event, callback) {
-			if (!this.subscriptions[event]) {
-				this.subscriptions[event] = [];
-			}
-
-			this.subscriptions[event].push(callback);
-		}
-
-		trigger(event, data) {
-			if (!this.subscriptions[event]) {
-				return;
-			}
-
-			for (var i = 0; i < this.subscriptions[event].length; i++) {
-				this.subscriptions[event][i](data);
-			}
-		}
-
-		updateZoomHandle(invert) {
-			var zoomRangeHandle = this.data.element.querySelector(".zoom-range-handle")
-
-			if (!zoomRangeHandle) {
-				return
-			}
-
-			var range = this.stats.maxZoom - this.stats.minZoom
-			var currentPosition = this.stats.z - this.stats.minZoom
-			var percent = currentPosition / range
-			zoomRangeHandle.style.bottom = (invert ? 100 - (percent * 100) : percent * 100) + "%"
-		}
-
-		createControls(options) {
-			var self = this
-			var fullscreenChange = () => {
-				self.fullscreen = !self.fullscreen
-
-				if (!self.fullscreen) {
-					self.exitFullscreen()
-
-					if (options.onExitFullscreen) {
-						options.onExitFullscreen(options.self)
-					}
-				}
-			}
-
-			var isMobile = /iPad|iPhone|iPod|Android/.test(window.navigator.userAgent)
-			var buttonWrapper = this.data.element.querySelectorAll(".buttonWrapper")
-			var zoomControlsWrapper
-
-			if (buttonWrapper && buttonWrapper.length) {
-				return
-				// for (var b = 0; b < buttonWrapper.length; b++) {
-				// 	buttonWrapper[b].parentNode.removeChild(buttonWrapper[b])
-				// }
-			}
-
-			buttonWrapper = window.document.createElement("div");
-			buttonWrapper.classList.add("buttonWrapper")
-			this.data.element.appendChild(buttonWrapper);
-
-			var vr = options.vr
-			var fullscreen = options.fullscreen
-			var zoom = options.zoom
-			// var zoomSelf = options.self
-
-			// var zoomMouseDown = (e) => {
-			// 	e.preventDefault()
-			// 	e.stopPropagation()
-
-			// 	zoomControlsWrapper.classList.add("active")
-			// 	var isDragging = true
-			// 	var y = 0;
-			// 	var lastY = e.clientY;
-
-			// 	var mouseMove = (e) => {
-			// 		e.preventDefault()
-			// 		e.stopPropagation()
-
-			// 		if (isDragging === true) {
-			// 			y = -(e.clientY - lastY);
-			// 			zoom(y / 20, zoomSelf)
-			// 			lastY = e.clientY
-			// 		}
-
-			// 	}
-
-			// 	var mouseUp = () => {
-			// 		zoomControlsWrapper.classList.remove("active")
-			// 		window.document.removeEventListener("mousemove", mouseMove, false);
-			// 		window.document.removeEventListener("mouseup", mouseUp, false);
-			// 	}
-
-			// 	window.document.addEventListener("mousemove", mouseMove, false);
-			// 	window.document.addEventListener("mouseup", mouseUp, false);
-			// }
-
-			if (vr) {
-				var vrButton = window.document.createElement("button");
-				vrButton.innerHTML = '<e1-icon type="cardboard"></e1-icon>'
-				vrButton.addEventListener('click', () => {
-					vr(options.self)
-				}, false);
-				buttonWrapper.appendChild(vrButton);
-			}
-
-			if (fullscreen) {
-				window.document.removeEventListener('webkitfullscreenchange', fullscreenChange, false);
-				window.document.removeEventListener('mozfullscreenchange', fullscreenChange, false);
-				window.document.removeEventListener('fullscreenchange', fullscreenChange, false);
-				window.document.removeEventListener('MSFullscreenChange', fullscreenChange, false);
-
-				var fullscreenButton = window.document.createElement("button");
-				fullscreenButton.className = "fullscreen-button"
-				fullscreenButton.innerHTML = '<e1-icon type="fullscreen"></e1-icon>'
-				fullscreenButton.addEventListener('click', fullscreen.bind(options.self), false);
-				buttonWrapper.appendChild(fullscreenButton);
-
-				window.document.addEventListener('webkitfullscreenchange', fullscreenChange, false);
-				window.document.addEventListener('mozfullscreenchange', fullscreenChange, false);
-				window.document.addEventListener('fullscreenchange', fullscreenChange, false);
-				window.document.addEventListener('MSFullscreenChange', fullscreenChange, false);
-			}
-
-			if (zoom) {
-				zoomControlsWrapper = window.document.createElement("div")
-				zoomControlsWrapper.className = isMobile ? "zoom-controls mobile" : "zoom-controls"
-
-				var zoomPlus = window.document.createElement("button")
-				zoomPlus.className = "zoom-plus"
-				zoomPlus.innerHTML = '<e1-icon type="plus"></e1-icon>'
-				zoomPlus.addEventListener("click", () => {
-					zoom(1, options.self)
-				}, false)
-
-				var zoomMinus = window.document.createElement("button")
-				zoomMinus.className = "zoom-minus"
-				zoomMinus.innerHTML = '<e1-icon type="minus"></e1-icon>'
-				zoomMinus.addEventListener("click", () => {
-					zoom(-1, options.self)
-				}, false)
-
-
-				// var zoomRange = window.document.createElement("div")
-				// zoomRange.className = "zoom-range"
-				// zoomRange.addEventListener("mousedown", zoomMouseDown.bind(this), false)
-
-				// var zoomRangeHandle = window.document.createElement("div")
-				// zoomRangeHandle.className = "zoom-range-handle"
-				// zoomRangeHandle.addEventListener("mousedown", zoomMouseDown.bind(this), false)
-
-				// zoomRange.appendChild(zoomRangeHandle)
-				// zoomControlsWrapper.appendChild(zoomPlus)
-				// zoomControlsWrapper.appendChild(zoomRange)
-				// zoomControlsWrapper.appendChild(zoomMinus)
-				// buttonWrapper.appendChild(zoomControlsWrapper)
-				buttonWrapper.appendChild(zoomPlus)
-				buttonWrapper.appendChild(zoomMinus)
-			}
+		if (this.data.crop) {
+			this.data.cropper = new Cropper(this.data)
 		}
 	}
 
-	module.exports = ImageRenderer
-	window.ImageRenderer = ImageRenderer
+	download() {
+		var canvas = this.data.element.querySelector("canvas")
+		canvas.toBlob((file) => {
 
-})();
+			var a = window.document.createElement("a")
+			a.download = true
+			a.href = window.URL.createObjectURL(file)
+			a.click()
+
+		})
+	}
+
+	isFullscreen() {
+		return this.fullscreen
+	}
+
+	exitFullscreen() {
+		var canvasWrapper = this.data.element;
+		canvasWrapper.parentNode.classList.remove("fullscreen");
+
+		if (window.document.exitFullscreen) {
+			window.document.exitFullscreen();
+		} else if (window.document.webkitExitFullscreen) {
+			window.document.webkitExitFullscreen();
+		} else if (window.document.mozCancelFullScreen) {
+			window.document.mozCancelFullScreen();
+		} else if (window.document.msExitFullscreen) {
+			window.document.msExitFullscreen();
+		}
+	}
+
+	enterFullscreen() {
+		var canvasWrapper = this.data.element;
+		canvasWrapper.parentNode.classList.add("fullscreen");
+
+		if (canvasWrapper.requestFullscreen) {
+			canvasWrapper.requestFullscreen();
+		} else if (canvasWrapper.webkitRequestFullscreen) {
+			canvasWrapper.webkitRequestFullscreen();
+		} else if (canvasWrapper.mozRequestFullScreen) {
+			canvasWrapper.mozRequestFullScreen();
+		} else if (canvasWrapper.msRequestFullscreen) {
+			canvasWrapper.msRequestFullscreen();
+		}
+	}
+
+	toggleFullscreen() {
+		this.fullscreenToggledByButton = true
+
+		if (this.fullscreen) {
+			this.exitFullscreen()
+		} else {
+			this.enterFullscreen()
+		}
+	}
+
+	subscribe(event, callback) {
+		if (!this.subscriptions[event]) {
+			this.subscriptions[event] = [];
+		}
+
+		this.subscriptions[event].push(callback);
+	}
+
+	trigger(event, data) {
+		if (!this.subscriptions[event]) {
+			return;
+		}
+
+		for (var i = 0; i < this.subscriptions[event].length; i++) {
+			this.subscriptions[event][i](data);
+		}
+	}
+
+	updateZoomHandle(invert) {
+		var zoomRangeHandle = this.data.element.querySelector(".zoom-range-handle")
+
+		if (!zoomRangeHandle) {
+			return
+		}
+
+		var range = this.stats.maxZoom - this.stats.minZoom
+		var currentPosition = this.stats.z - this.stats.minZoom
+		var percent = currentPosition / range
+		zoomRangeHandle.style.bottom = (invert ? 100 - (percent * 100) : percent * 100) + "%"
+	}
+
+	createControls(options) {
+		var self = this
+		var fullscreenChange = () => {
+			self.fullscreen = !self.fullscreen
+
+			if (!self.fullscreen) {
+				self.exitFullscreen()
+
+				if (options.onExitFullscreen) {
+					options.onExitFullscreen(options.self)
+				}
+			}
+		}
+
+		var isMobile = /iPad|iPhone|iPod|Android/.test(window.navigator.userAgent)
+		var buttonWrapper = this.data.element.querySelectorAll(".buttonWrapper")
+		var zoomControlsWrapper
+
+		if (buttonWrapper && buttonWrapper.length) {
+			return
+			// for (var b = 0; b < buttonWrapper.length; b++) {
+			// 	buttonWrapper[b].parentNode.removeChild(buttonWrapper[b])
+			// }
+		}
+
+		buttonWrapper = window.document.createElement("div");
+		buttonWrapper.classList.add("buttonWrapper")
+		this.data.element.appendChild(buttonWrapper);
+
+		var vr = options.vr
+		var fullscreen = options.fullscreen
+		var zoom = options.zoom
+		// var zoomSelf = options.self
+
+		// var zoomMouseDown = (e) => {
+		// 	e.preventDefault()
+		// 	e.stopPropagation()
+
+		// 	zoomControlsWrapper.classList.add("active")
+		// 	var isDragging = true
+		// 	var y = 0;
+		// 	var lastY = e.clientY;
+
+		// 	var mouseMove = (e) => {
+		// 		e.preventDefault()
+		// 		e.stopPropagation()
+
+		// 		if (isDragging === true) {
+		// 			y = -(e.clientY - lastY);
+		// 			zoom(y / 20, zoomSelf)
+		// 			lastY = e.clientY
+		// 		}
+
+		// 	}
+
+		// 	var mouseUp = () => {
+		// 		zoomControlsWrapper.classList.remove("active")
+		// 		window.document.removeEventListener("mousemove", mouseMove, false);
+		// 		window.document.removeEventListener("mouseup", mouseUp, false);
+		// 	}
+
+		// 	window.document.addEventListener("mousemove", mouseMove, false);
+		// 	window.document.addEventListener("mouseup", mouseUp, false);
+		// }
+
+		if (vr) {
+			var vrButton = window.document.createElement("button");
+			vrButton.innerHTML = '<e1-icon type="cardboard"></e1-icon>'
+			vrButton.addEventListener('click', () => {
+				vr(options.self)
+			}, false);
+			buttonWrapper.appendChild(vrButton);
+		}
+
+		if (fullscreen) {
+			window.document.removeEventListener('webkitfullscreenchange', fullscreenChange, false);
+			window.document.removeEventListener('mozfullscreenchange', fullscreenChange, false);
+			window.document.removeEventListener('fullscreenchange', fullscreenChange, false);
+			window.document.removeEventListener('MSFullscreenChange', fullscreenChange, false);
+
+			var fullscreenButton = window.document.createElement("button");
+			fullscreenButton.className = "fullscreen-button"
+			fullscreenButton.innerHTML = '<e1-icon type="fullscreen"></e1-icon>'
+			fullscreenButton.addEventListener('click', fullscreen.bind(options.self), false);
+			buttonWrapper.appendChild(fullscreenButton);
+
+			window.document.addEventListener('webkitfullscreenchange', fullscreenChange, false);
+			window.document.addEventListener('mozfullscreenchange', fullscreenChange, false);
+			window.document.addEventListener('fullscreenchange', fullscreenChange, false);
+			window.document.addEventListener('MSFullscreenChange', fullscreenChange, false);
+		}
+
+		if (zoom) {
+			zoomControlsWrapper = window.document.createElement("div")
+			zoomControlsWrapper.className = isMobile ? "zoom-controls mobile" : "zoom-controls"
+
+			var zoomPlus = window.document.createElement("button")
+			zoomPlus.className = "zoom-plus"
+			zoomPlus.innerHTML = '<e1-icon type="plus"></e1-icon>'
+			zoomPlus.addEventListener("click", () => {
+				zoom(1, options.self)
+			}, false)
+
+			var zoomMinus = window.document.createElement("button")
+			zoomMinus.className = "zoom-minus"
+			zoomMinus.innerHTML = '<e1-icon type="minus"></e1-icon>'
+			zoomMinus.addEventListener("click", () => {
+				zoom(-1, options.self)
+			}, false)
+
+
+			// var zoomRange = window.document.createElement("div")
+			// zoomRange.className = "zoom-range"
+			// zoomRange.addEventListener("mousedown", zoomMouseDown.bind(this), false)
+
+			// var zoomRangeHandle = window.document.createElement("div")
+			// zoomRangeHandle.className = "zoom-range-handle"
+			// zoomRangeHandle.addEventListener("mousedown", zoomMouseDown.bind(this), false)
+
+			// zoomRange.appendChild(zoomRangeHandle)
+			// zoomControlsWrapper.appendChild(zoomPlus)
+			// zoomControlsWrapper.appendChild(zoomRange)
+			// zoomControlsWrapper.appendChild(zoomMinus)
+			// buttonWrapper.appendChild(zoomControlsWrapper)
+			buttonWrapper.appendChild(zoomPlus)
+			buttonWrapper.appendChild(zoomMinus)
+		}
+	}
+}
+
+module.exports = ImageRenderer
+window.ImageRenderer = ImageRenderer
+
+

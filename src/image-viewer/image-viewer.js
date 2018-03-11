@@ -1,6 +1,5 @@
 const E1 = window.E1
-const ImageRenderer = require("./renderer")
-const vm = require('vm');
+import ImageRenderer from "./renderer"
 
 class E1ImageViewer {
     constructor(el) {
@@ -53,48 +52,74 @@ class E1ImageViewer {
             return this.el.renderer.download()
         }
 
-        var hasScanned = false
+        this.el.renderer.onready = () => {
+            if (this.el.onready && typeof this.el.onready === "function") {
+                this.el.onready()
+            }
 
-        this.el.renderer.subscribe("statsUpdate", (stats) => {
-            if (stats.ready && !hasScanned) {
+            var iOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
 
-                if (this.el.onready && typeof this.el.onready === "function") {
-                    this.el.onready()
-                }
+            if (iOS) {
+                var canvasWrapper = this.el.querySelector("canvas").parentNode
 
-                if (!this.el.imageready && this.el.getAttribute("imageready")) {
-                    vm.createContext()
+                if (canvasWrapper) {
+                    canvasWrapper.requestFullscreen = () => {
+                        this.el.classList.add("fake-fullscreen")
+                    }
 
-                    try {
-                        return vm.runInNewContext(this.el.getAttribute("imageready"))
-                    } catch (e) { }
-                }
+                    var exit = window.document.webkitExitFullscreen
 
-                hasScanned = true
+                    window.document.exitFullscreen = () => {
+                        this.el.classList.remove("fake-fullscreen")
 
-                var iOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
-
-                if (iOS) {
-                    var canvasWrapper = this.el.querySelector("canvas").parentNode
-
-                    if (canvasWrapper) {
-                        canvasWrapper.requestFullscreen = () => {
-                            this.el.classList.add("fake-fullscreen")
-                        }
-
-                        var exit = window.document.webkitExitFullscreen
-
-                        window.document.exitFullscreen = () => {
-                            this.el.classList.remove("fake-fullscreen")
-
-                            if (exit && typeof exit === "function") {
-                                exit()
-                            }
+                        if (exit && typeof exit === "function") {
+                            exit()
                         }
                     }
                 }
             }
-        })
+        }
+
+        // this.el.renderer.subscribe("statsUpdate", (stats) => {
+        //     if (stats.ready && !hasScanned) {
+
+        //         if (this.el.onready && typeof this.el.onready === "function") {
+        //             this.el.onready()
+        //         }
+
+        //         if (!this.el.imageready && this.el.getAttribute("imageready")) {
+        //             vm.createContext()
+
+        //             try {
+        //                 return vm.runInNewContext(this.el.getAttribute("imageready"))
+        //             } catch (e) { }
+        //         }
+
+        //         hasScanned = true
+
+        //         var iOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
+
+        //         if (iOS) {
+        //             var canvasWrapper = this.el.querySelector("canvas").parentNode
+
+        //             if (canvasWrapper) {
+        //                 canvasWrapper.requestFullscreen = () => {
+        //                     this.el.classList.add("fake-fullscreen")
+        //                 }
+
+        //                 var exit = window.document.webkitExitFullscreen
+
+        //                 window.document.exitFullscreen = () => {
+        //                     this.el.classList.remove("fake-fullscreen")
+
+        //                     if (exit && typeof exit === "function") {
+        //                         exit()
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+        // })
     }
 }
 
