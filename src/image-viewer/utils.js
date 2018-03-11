@@ -75,7 +75,7 @@ class ImageUtils {
 			}, (prog) => {
 				data.instance.stats.previewProgress = prog
 				// progressBar.style.width = prog + "%"
-				E1.setModel(null, `@ProgressService.progress`, prog)
+				// E1.setModel(null, `@ProgressService.progress`, prog)
 				data.instance.trigger("statsUpdate", data.instance.stats)
 			}, () => {
 				loadMain()
