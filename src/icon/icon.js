@@ -376,7 +376,7 @@ class Icon {
 
                 img.src = url
             }else if(toFont){
-                this.el.appendChild(E1.cleanHtml(`<i class="e1-font-icon-${type}"></i>`))
+                this.el.appendChild(E1.cleanHtml(`<i class="e1icon-${type}"></i>`))
             }else{
                 this.el.appendChild(E1.cleanHtml(`<span class="svg-icon"><span class="svg-icon-inner">${this.templates[type]}</span></span>`))
             }
