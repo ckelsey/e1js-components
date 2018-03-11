@@ -78,6 +78,9 @@ class ImageUtils {
 				// E1.setModel(null, `@ProgressService.progress`, prog)
 				data.instance.trigger("statsUpdate", data.instance.stats)
 			}, () => {
+				if (data.instance.previewReady && typeof data.instance.previewReady === `function`){
+					data.instance.previewReady()
+				}
 				loadMain()
 			});
 		}

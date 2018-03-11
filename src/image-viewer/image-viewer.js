@@ -52,7 +52,7 @@ class E1ImageViewer {
             return this.el.renderer.download()
         }
 
-        this.el.renderer.onready = () => {
+        this.el.renderer.previewReady = () => {
             if (this.el.onready && typeof this.el.onready === "function") {
                 this.el.onready()
             }
