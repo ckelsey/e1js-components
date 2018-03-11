@@ -9,13 +9,15 @@
     font-style: normal;
 }
 [class*='e1icon-']:before{
-	display: inline-block;
-   font-family: 'e1 icon';
-   font-style: normal;
-   font-weight: normal;
-   line-height: 1;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale
+    display: inline-block;
+    font-family: 'e1 icon';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    position: relative;
+    top: 5px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
 }
 .e1icon-vr:before{content:'\0041';}
 .e1icon-360:before{content:'\0042';}
@@ -33,6 +35,12 @@ e1-icon{
 
 e1-icon *{
     backface-visibility: hidden;
+}
+
+e1-icon i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .svg-icon {
