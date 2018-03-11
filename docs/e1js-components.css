@@ -928,7 +928,7 @@ e1-image-viewer .zoom-controls:hover .zoom-range-handle, e1-image-viewer .zoom-c
     font-weight: normal;
     font-style: normal;
 }
-[class*='e1-font-icon-']:before{
+[class*='e1icon-']:before{
 	display: inline-block;
    font-family: 'e1 icon';
    font-style: normal;
@@ -937,11 +937,13 @@ e1-image-viewer .zoom-controls:hover .zoom-range-handle, e1-image-viewer .zoom-c
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale
 }
-.e1-font-icon-vr:before{content:'A';}
-.e1-font-icon-360:before{content:'B';}
-.e1-font-icon-binocs:before{content:'C';}
-.e1-font-icon-heart-outline:before{content:'D';}
-.e1-font-icon-heart:before{content:'E';}
+.e1icon-vr:before{content:'A';}
+.e1icon-360:before{content:'B';}
+.e1icon-binocs:before{content:'C';}
+.e1icon-share-points:before{content:'D';}
+.e1icon-eye:before{content:'E';}
+.e1icon-heart-outline:before{content:'F';}
+.e1icon-heart:before{content:'G';}
 
 e1-icon{
 	display: inline-block;
