@@ -955,12 +955,6 @@ e1-icon *{
     backface-visibility: hidden;
 }
 
-e1-icon i{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .svg-icon {
 	display: block;
 	width: 100%;
