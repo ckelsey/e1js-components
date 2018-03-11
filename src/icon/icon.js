@@ -339,8 +339,8 @@ class Icon {
                     svg.style.strokeWidth = `21px`
                 }
 
-                var svgString = new XMLSerializer().serializeToString(svg)
-                var blob = new Blob([svgString], { type: `image/svg+xml;charset=utf-8` })
+                var svgString = new window.XMLSerializer().serializeToString(svg)
+                var blob = new window.Blob([svgString], { type: `image/svg+xml;charset=utf-8` })
                 var url = window.URL.createObjectURL(blob)
                 var img = new window.Image()
                 var ctx = window.document.createElement(`canvas`).getContext(`2d`)
@@ -349,7 +349,7 @@ class Icon {
 
                 
 
-                img.onload = e =>{
+                img.onload = () =>{
 
                     if (BG) {
                         var centerX = ctx.canvas.width / 2
