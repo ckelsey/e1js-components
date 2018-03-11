@@ -87,6 +87,7 @@ class ImageRenderer {
 	}
 
 	enterFullscreen() {
+		
 		var canvasWrapper = this.data.element;
 		canvasWrapper.parentNode.classList.add("fullscreen");
 
@@ -102,12 +103,17 @@ class ImageRenderer {
 	}
 
 	toggleFullscreen() {
-		this.fullscreenToggledByButton = true
-
+		
 		if (this.fullscreen) {
 			this.exitFullscreen()
 		} else {
 			this.enterFullscreen()
+		}
+
+		// iOS doesn't have fullscreen capabilities
+		var iOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
+		if(iOS){
+			this.fullscreen = !this.fullscreen
 		}
 	}
 
@@ -225,7 +231,11 @@ class ImageRenderer {
 			var fullscreenButton = window.document.createElement("button");
 			fullscreenButton.className = "fullscreen-button"
 			fullscreenButton.innerHTML = '<e1-icon type="fullscreen"></e1-icon>'
-			fullscreenButton.addEventListener('click', fullscreen.bind(options.self), false);
+			if(isMobile){
+				fullscreenButton.addEventListener('touchend', fullscreen.bind(options.self), false);
+			}else{
+				fullscreenButton.addEventListener('click', fullscreen.bind(options.self), false);
+			}
 			buttonWrapper.appendChild(fullscreenButton);
 
 			window.document.addEventListener('webkitfullscreenchange', fullscreenChange, false);

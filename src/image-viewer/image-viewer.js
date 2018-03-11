@@ -53,74 +53,11 @@ class E1ImageViewer {
         }
 
         this.el.renderer.previewReady = () => {
-            console.log("READY")
+
             if (this.el.onready && typeof this.el.onready === "function") {
                 this.el.onready()
             }
-
-            var iOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
-
-            if (iOS) {
-                var canvasWrapper = this.el.querySelector("canvas").parentNode
-
-                if (canvasWrapper) {
-                    canvasWrapper.requestFullscreen = () => {
-                        this.el.classList.add("fake-fullscreen")
-                    }
-
-                    var exit = window.document.webkitExitFullscreen
-
-                    window.document.exitFullscreen = () => {
-                        this.el.classList.remove("fake-fullscreen")
-
-                        if (exit && typeof exit === "function") {
-                            exit()
-                        }
-                    }
-                }
-            }
         }
-
-        // this.el.renderer.subscribe("statsUpdate", (stats) => {
-        //     if (stats.ready && !hasScanned) {
-
-        //         if (this.el.onready && typeof this.el.onready === "function") {
-        //             this.el.onready()
-        //         }
-
-        //         if (!this.el.imageready && this.el.getAttribute("imageready")) {
-        //             vm.createContext()
-
-        //             try {
-        //                 return vm.runInNewContext(this.el.getAttribute("imageready"))
-        //             } catch (e) { }
-        //         }
-
-        //         hasScanned = true
-
-        //         var iOS = /iPad|iPhone|iPod/.test(window.navigator.userAgent)
-
-        //         if (iOS) {
-        //             var canvasWrapper = this.el.querySelector("canvas").parentNode
-
-        //             if (canvasWrapper) {
-        //                 canvasWrapper.requestFullscreen = () => {
-        //                     this.el.classList.add("fake-fullscreen")
-        //                 }
-
-        //                 var exit = window.document.webkitExitFullscreen
-
-        //                 window.document.exitFullscreen = () => {
-        //                     this.el.classList.remove("fake-fullscreen")
-
-        //                     if (exit && typeof exit === "function") {
-        //                         exit()
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     }
-        // })
     }
 }
 
