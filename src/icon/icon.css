@@ -14,8 +14,6 @@
     font-style: normal;
     font-weight: normal;
     line-height: 1;
-    position: relative;
-    top: 5px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
 }

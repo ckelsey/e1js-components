@@ -934,8 +934,6 @@ e1-image-viewer .zoom-controls:hover .zoom-range-handle, e1-image-viewer .zoom-c
     font-style: normal;
     font-weight: normal;
     line-height: 1;
-    position: relative;
-    top: 5px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
 }
