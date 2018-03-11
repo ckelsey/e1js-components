@@ -8,7 +8,7 @@
     font-weight: normal;
     font-style: normal;
 }
-[class*='e1-font-icon-']:before{
+[class*='e1icon-']:before{
 	display: inline-block;
    font-family: 'e1 icon';
    font-style: normal;
@@ -17,11 +17,13 @@
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale
 }
-.e1-font-icon-vr:before{content:'\0041';}
-.e1-font-icon-360:before{content:'\0042';}
-.e1-font-icon-binocs:before{content:'\0043';}
-.e1-font-icon-heart-outline:before{content:'\0044';}
-.e1-font-icon-heart:before{content:'\0045';}
+.e1icon-vr:before{content:'\0041';}
+.e1icon-360:before{content:'\0042';}
+.e1icon-binocs:before{content:'\0043';}
+.e1icon-share-points:before{content:'\0044';}
+.e1icon-eye:before{content:'\0045';}
+.e1icon-heart-outline:before{content:'\0046';}
+.e1icon-heart:before{content:'\0047';}
 
 e1-icon{
 	display: inline-block;
