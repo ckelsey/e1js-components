@@ -622,13 +622,17 @@ e1-image-viewer .renderer-progressbar {
 }
 
 e1-image-viewer div.buttonWrapper {
-	max-height: 40px;
+	max-height: 100%;
+	height: 100%;
 	position: absolute;
 	left: 0px;
 	bottom: 0px;
 	width: 100%;
 	z-index: 999999999;
 	pointer-events: none;
+	flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
 }
 
 #crop-positioner {
@@ -786,12 +790,14 @@ e1-image-viewer .zoom-controls {
 	transition: all .5s;
 }
 
-e1-image-viewer .zoom-controls:hover, e1-image-viewer .zoom-controls.active, e1-image-viewer .zoom-controls.mobile {
+/* e1-image-viewer .zoom-controls:hover, e1-image-viewer .zoom-controls.active, e1-image-viewer .zoom-controls.mobile  */
+e1-image-viewer .zoom-controls{
 	height: 125px;
 	top: -94px;
 }
 
-e1-image-viewer .zoom-controls.mobile:hover, e1-image-viewer .zoom-controls.mobile.active, e1-image-viewer .zoom-controls.mobile {
+/* e1-image-viewer .zoom-controls.mobile:hover, e1-image-viewer .zoom-controls.mobile.active, e1-image-viewer .zoom-controls.mobile */
+e1-image-viewer .zoom-controls {
 	height: 35px;
 	top: 0px;
 	width: 85px;
@@ -829,7 +835,8 @@ e1-image-viewer .zoom-controls button.zoom-plus {
 	box-shadow: none;
 }
 
-e1-image-viewer .zoom-controls:hover button.zoom-plus, e1-image-viewer .zoom-controls.active button.zoom-plus, e1-image-viewer .zoom-controls.mobile button.zoom-plus, e1-image-viewer .zoom-controls:hover button, e1-image-viewer .zoom-controls.active button, e1-image-viewer .zoom-controls.mobile button {
+/* e1-image-viewer .zoom-controls:hover button.zoom-plus, e1-image-viewer .zoom-controls.active button.zoom-plus, e1-image-viewer .zoom-controls.mobile button.zoom-plus, e1-image-viewer .zoom-controls:hover button, e1-image-viewer .zoom-controls.active button, e1-image-viewer .zoom-controls.mobile button */
+e1-image-viewer .zoom-controls button {
 	opacity: 0.7;
 	pointer-events: all;
 	height: 21px;
@@ -844,6 +851,7 @@ e1-image-viewer .zoom-controls button svg {
 }
 
 e1-image-viewer .zoom-controls .zoom-range {
+	
 	flex-grow: 1;
 	display: block;
 	width: 35px;
@@ -855,6 +863,7 @@ e1-image-viewer .zoom-controls .zoom-range {
 	height: 0px;
 	cursor: ns-resize;
 	transition: all .5s;
+	display: none;
 }
 
 e1-image-viewer .zoom-controls .zoom-range:before {
@@ -867,6 +876,7 @@ e1-image-viewer .zoom-controls .zoom-range:before {
 	position: absolute;
 	left: calc(50% - 1.5px);
 	transition: all .25s;
+	display: none;
 }
 
 e1-image-viewer .zoom-controls:hover .zoom-range, e1-image-viewer .zoom-controls.active .zoom-range {
@@ -874,6 +884,7 @@ e1-image-viewer .zoom-controls:hover .zoom-range, e1-image-viewer .zoom-controls
 	height: auto;
 	pointer-events: all;
 	margin: 5px 0px;
+	display: none;
 }
 
 e1-image-viewer .zoom-controls.mobile .zoom-range {
@@ -882,10 +893,12 @@ e1-image-viewer .zoom-controls.mobile .zoom-range {
 	pointer-events: none;
 	margin: 5px 0px;
 	cursor: unset;
+	display: none;
 }
 
 e1-image-viewer .zoom-controls:hover .zoom-range:before, e1-image-viewer .zoom-controls.active .zoom-range:before {
 	height: 100%;
+	display: none;
 }
 
 e1-image-viewer .zoom-controls .zoom-range-handle {
@@ -897,10 +910,12 @@ e1-image-viewer .zoom-controls .zoom-range-handle {
 	padding: 0px;
 	left: calc(50% - 7px);
 	transform: translateY(5px);
+	display: none;
 }
 
 e1-image-viewer .zoom-controls:hover .zoom-range-handle, e1-image-viewer .zoom-controls.active .zoom-range-handle {
 	height: 10px;
+	display: none;
 }
 
 .image-renderer {

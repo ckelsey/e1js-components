@@ -174,38 +174,38 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 			var vr = options.vr
 			var fullscreen = options.fullscreen
 			var zoom = options.zoom
-			var zoomSelf = options.self
+			// var zoomSelf = options.self
 
-			var zoomMouseDown = (e) => {
-				e.preventDefault()
-				e.stopPropagation()
+			// var zoomMouseDown = (e) => {
+			// 	e.preventDefault()
+			// 	e.stopPropagation()
 
-				zoomControlsWrapper.classList.add("active")
-				var isDragging = true
-				var y = 0;
-				var lastY = e.clientY;
+			// 	zoomControlsWrapper.classList.add("active")
+			// 	var isDragging = true
+			// 	var y = 0;
+			// 	var lastY = e.clientY;
 
-				var mouseMove = (e) => {
-					e.preventDefault()
-					e.stopPropagation()
+			// 	var mouseMove = (e) => {
+			// 		e.preventDefault()
+			// 		e.stopPropagation()
 
-					if (isDragging === true) {
-						y = -(e.clientY - lastY);
-						zoom(y / 20, zoomSelf)
-						lastY = e.clientY
-					}
+			// 		if (isDragging === true) {
+			// 			y = -(e.clientY - lastY);
+			// 			zoom(y / 20, zoomSelf)
+			// 			lastY = e.clientY
+			// 		}
 
-				}
+			// 	}
 
-				var mouseUp = () => {
-					zoomControlsWrapper.classList.remove("active")
-					window.document.removeEventListener("mousemove", mouseMove, false);
-					window.document.removeEventListener("mouseup", mouseUp, false);
-				}
+			// 	var mouseUp = () => {
+			// 		zoomControlsWrapper.classList.remove("active")
+			// 		window.document.removeEventListener("mousemove", mouseMove, false);
+			// 		window.document.removeEventListener("mouseup", mouseUp, false);
+			// 	}
 
-				window.document.addEventListener("mousemove", mouseMove, false);
-				window.document.addEventListener("mouseup", mouseUp, false);
-			}
+			// 	window.document.addEventListener("mousemove", mouseMove, false);
+			// 	window.document.addEventListener("mouseup", mouseUp, false);
+			// }
 
 			if (vr) {
 				var vrButton = window.document.createElement("button");
@@ -252,19 +252,22 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 					zoom(-1, options.self)
 				}, false)
 
-				var zoomRange = window.document.createElement("div")
-				zoomRange.className = "zoom-range"
-				zoomRange.addEventListener("mousedown", zoomMouseDown.bind(this), false)
 
-				var zoomRangeHandle = window.document.createElement("div")
-				zoomRangeHandle.className = "zoom-range-handle"
-				zoomRangeHandle.addEventListener("mousedown", zoomMouseDown.bind(this), false)
+				// var zoomRange = window.document.createElement("div")
+				// zoomRange.className = "zoom-range"
+				// zoomRange.addEventListener("mousedown", zoomMouseDown.bind(this), false)
 
-				zoomRange.appendChild(zoomRangeHandle)
-				zoomControlsWrapper.appendChild(zoomPlus)
-				zoomControlsWrapper.appendChild(zoomRange)
-				zoomControlsWrapper.appendChild(zoomMinus)
-				buttonWrapper.appendChild(zoomControlsWrapper)
+				// var zoomRangeHandle = window.document.createElement("div")
+				// zoomRangeHandle.className = "zoom-range-handle"
+				// zoomRangeHandle.addEventListener("mousedown", zoomMouseDown.bind(this), false)
+
+				// zoomRange.appendChild(zoomRangeHandle)
+				// zoomControlsWrapper.appendChild(zoomPlus)
+				// zoomControlsWrapper.appendChild(zoomRange)
+				// zoomControlsWrapper.appendChild(zoomMinus)
+				// buttonWrapper.appendChild(zoomControlsWrapper)
+				buttonWrapper.appendChild(zoomPlus)
+				buttonWrapper.appendChild(zoomMinus)
 			}
 		}
 	}
