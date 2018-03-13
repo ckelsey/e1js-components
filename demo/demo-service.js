@@ -405,7 +405,8 @@ class DemoService {
 
             var sections = window.document.querySelectorAll('[e1-accordian-toggle-group="main"][e1-accordian-content]')
 
-            sections.forEach(function (section) {
+            for (var i = 0; i < sections.length;i++){
+                var section = sections[i]
 
                 var req = new XMLHttpRequest()
                 req.open("GET", section.getAttribute("e1-accordian-content") + ".html")
@@ -424,7 +425,7 @@ class DemoService {
                     }
                 })
                 req.send()
-            })
+            }
         }
 
         this.initTests = () => {
