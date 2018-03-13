@@ -18,8 +18,6 @@ if (!window.HTMLCanvasElement.prototype.toBlob) {
 	})
 }
 
-
-
 import Utils from "./utils"
 var RendererFlat = require("./renderer-flat")
 var Renderer360 = require("./renderer-360")

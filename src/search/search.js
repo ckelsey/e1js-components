@@ -125,9 +125,9 @@ class Search {
             doSearch = true
         }
 
-        if (doSearch) {
-            // this.getResults()
-        }
+        // if (doSearch) {
+        //     // this.getResults()
+        // }
     }
 }
 

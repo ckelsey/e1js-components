@@ -64,6 +64,7 @@
 	},
 	"dependencies": {
 		"babel-polyfill": "^6.26.0",
-		"e1js": "latest"
+		"e1js": "latest",
+		"webvr-polyfill": "^0.10.2"
 	}
 }

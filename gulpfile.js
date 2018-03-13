@@ -179,6 +179,64 @@ gulp.task('publish', function (done) {
 						console.log(stdout);
 						console.log(stderr);
 					})
+
+					exec('cp src/image-viewer/lib/matrix.js dist/matrix.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/pano.js dist/pano.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/three.js dist/three.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/webvr.js dist/webvr.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/wglu.js dist/wglu.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+
+
+					exec('cp src/image-viewer/lib/matrix.js docs/matrix.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/pano.js docs/pano.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/three.js docs/three.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/webvr.js docs/webvr.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/wglu.js docs/wglu.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+
+
+
+					
+
 					exec('cp dist/e1js-components.js docs/e1js-components.js', function (err, stdout, stderr) {
 						console.log(stdout);
 						console.log(stderr);
