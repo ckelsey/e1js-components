@@ -50,14 +50,6 @@ class Search {
         var onSearch = E1.getModel(this.el, "onsearch")
         var onSearchEl = this.el.onsearch
 
-        if (onSearch && typeof onSearch === "function") {
-            onSearch(val)
-        }
-
-        if (onSearchEl && typeof onSearchEl === "function") {
-            onSearchEl(val)
-        }
-
         var reportResults = () => {
             if (!this.results) {
                 this.results = []
@@ -69,6 +61,14 @@ class Search {
 
             if (this.el.onresults && typeof this.el.onresults === "function") {
                 this.el.onresults(this.results)
+            }
+
+            if (onSearch && typeof onSearch === "function") {
+                onSearch(val)
+            }
+
+            if (onSearchEl && typeof onSearchEl === "function") {
+                onSearchEl(val)
             }
         }
 
