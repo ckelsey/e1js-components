@@ -126,7 +126,7 @@ class Search {
         }
 
         if (doSearch) {
-            this.getResults()
+            // this.getResults()
         }
     }
 }
