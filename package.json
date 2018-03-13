@@ -63,6 +63,7 @@
 		"test": "nightwatch"
 	},
 	"dependencies": {
+		"babel-polyfill": "^6.26.0",
 		"e1js": "latest"
 	}
 }
