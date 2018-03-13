@@ -94,7 +94,7 @@ class Dropdown {
 					clickThrottle = setTimeout(() => {
 						var container = this.el.querySelector(".dropdown-container")
 
-						if (container.classList.contains("mouseenter")) {
+						if (container.classList && container.classList.contains("mouseenter")) {
 							if (this.el.optionClicked && typeof this.el.optionClicked === "function") {
 								this.el.optionClicked(e, optionWrapper)
 							}

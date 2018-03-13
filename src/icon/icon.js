@@ -327,9 +327,9 @@ class Icon {
                 var BG = temp.querySelector(`.svg-bg`)
                 var color = window.getComputedStyle(this.el).getPropertyValue(`color`)
 
-                if (svg.classList.contains(`filled-svg`) && !svg.style.fill){
+                if (svg.classList && svg.classList.contains(`filled-svg`) && !svg.style.fill){
                     svg.style.fill = color
-                } else if (svg.classList.contains(`fill`) && !svg.style.fill){
+                } else if (svg.classList && svg.classList.contains(`fill`) && !svg.style.fill){
                     svg.style.fill = color
                     svg.style.stroke = color
                     svg.style.strokeWidth = `21px`

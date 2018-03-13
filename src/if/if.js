@@ -10,7 +10,7 @@ class E1If {
         this.parentNode.insertBefore(this.comment, this.el);
 
         this.check((check) => {
-            if (!check && this.parentNode.contains(this.el)) {
+            if (!check && this.parentNode && this.parentNode.contains(this.el)) {
                 this.parentNode.removeChild(this.el)
             }
         })
@@ -34,7 +34,7 @@ class E1If {
             this.check((check) => {
                 if (check && !this.el.parentNode) {
                     this.parentNode.insertBefore(this.el, this.comment);
-                } else if (!check && this.parentNode.contains(this.el)) {
+                } else if (!check && this.el.parentNode && this.el.parentNode.contains(this.el)) {
                     this.parentNode.removeChild(this.el)
                 }
             })

@@ -25,7 +25,7 @@ class Select {
 				var target = e.path ? e.path[0] : e.originalTarget ? e.originalTarget : e.target
 
 				try {
-					if (target !== el && !el.contains(target)) {
+					if (this.el && target !== this.el && !this.el.contains(target)) {
 						selectContainer.classList.remove("mouseenter")
 					}
 				} catch (error) { }
@@ -159,7 +159,7 @@ class Select {
 						clearTimeout(clickThrottle)
 
 						clickThrottle = setTimeout(() => {
-							if (selectContainer.classList.contains("mouseenter")) {
+							if (selectContainer.classList && selectContainer.classList.contains("mouseenter")) {
 								window.requestAnimationFrame(() => {
 									this.handleSelect(e)
 									selectContainer.classList.remove("mouseenter")
