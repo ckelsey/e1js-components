@@ -42,7 +42,7 @@ class Search {
             }
         })
 
-        this.getResults()
+        // this.getResults()
     }
 
     getResults() {
