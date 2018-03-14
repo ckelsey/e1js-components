@@ -180,6 +180,8 @@ class RendererVR {
 
 
 	onAnimationFrame() {
+		console.log(this.gl, this.panorama, this.vrDisplay);
+		
 		// do not attempt to render if there is no available WebGL context
 		if (!this.gl || !this.panorama) {
 			return;
@@ -214,15 +216,15 @@ class RendererVR {
 				this.panorama.render(this.projectionMat, this.viewMat);
 			}
 		} else {
-			window.requestAnimationFrame(()=>{
-				this.onAnimationFrame()
-			});
+			// window.requestAnimationFrame(()=>{
+			// 	this.onAnimationFrame()
+			// });
 
-			// No VRDisplay found.
-			this.gl.viewport(0, 0, this.webglCanvas.width, this.webglCanvas.height);
-			window.mat4.perspective(this.projectionMat, Math.PI * 0.4, this.webglCanvas.width / this.webglCanvas.height, 0.1, 1024.0);
-			window.mat4.identity(this.viewMat);
-			this.panorama.render(this.projectionMat, this.viewMat);
+			// // No VRDisplay found.
+			// this.gl.viewport(0, 0, this.webglCanvas.width, this.webglCanvas.height);
+			// window.mat4.perspective(this.projectionMat, Math.PI * 0.4, this.webglCanvas.width / this.webglCanvas.height, 0.1, 1024.0);
+			// window.mat4.identity(this.viewMat);
+			// this.panorama.render(this.projectionMat, this.viewMat);
 		}
 	}
 
