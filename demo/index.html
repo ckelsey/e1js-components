@@ -6,12 +6,15 @@
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 
-	<!-- <link rel="stylesheet" href="prism.css" />
+	<!-- Origin Trial Token, feature = WebVR (For Chrome M62+), origin = https://vr.cklsylabs.com, expires = 2018-04-25 -->
+	<meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-04-25" content="AuL9+CC4eDgFmTtNWyRFbm7yo4gQGT9SIXcuaf5+99132fB0Ip0BzpiqwVa/Xu/p9O2fhs0djB3ePJJOKKBY0gQAAABoeyJvcmlnaW4iOiJodHRwczovL3ZyLmNrbHN5bGFicy5jb206NDQzIiwiZmVhdHVyZSI6IldlYlZSMS4xTTYyIiwiZXhwaXJ5IjoxNTI0NjI0MjA0LCJpc1N1YmRvbWFpbiI6dHJ1ZX0=">
+
+	<link rel="stylesheet" href="prism.css" />
 	<script src="prism.js"></script>
 	<link rel="stylesheet" href="demo-styles.css" />
-	<link rel="stylesheet" href="e1js-components.css" /> -->
+	<link rel="stylesheet" href="e1js-components.css" />
 
-	<script src="webvr.js"></script>
+	<!-- <script src="webvr.js"></script>
 	<script src="wglu-url.js"></script>
 	<script>
 		// Dynamically turn the polyfill on if requested by the query args.
@@ -32,11 +35,11 @@
 	<script src="stats.js"></script>
 	<script src="pano.js"></script>
 	<script src="utils.js"></script>
-	<!-- <script src="three.js"></script> -->
+	<script src="three.js"></script> -->
 </head>
 
 <body>
-	<!-- <div id="header">
+	<div id="header">
 		<h1>E1
 			<small> A micro library for two way bound custom elements</small>
 		</h1>
@@ -47,7 +50,7 @@
 			<e1-dropdown label="Prebuilt directives" list="@demoService.page.prebuiltDirectives"></e1-dropdown>
 		</div>
 		<div id="main-content"></div>
-	</div> -->
+	</div>
 
 	
 
@@ -55,14 +58,15 @@
 	<!-- <e1-ui-recorder></e1-ui-recorder> -->
 
 	
-	<!-- <script src="e1js-components.js"></script>
+	<script src="image-renderer-lib.js"></script>
+	<script src="e1js-components.js"></script>
 	<script src="demo.js"></script>
 
-	<e1-image-viewer type="360mono" url="https://images.nvidia.com/ansel/images/ansel-images/YWR1bW15NTMyMTUxMjcxNzIwNzU5MDk0NjUwNjA_vr.jpg" preview="https://images.nvidia.com/ansel/images/ansel-images/YWR1bW15NTMyMTUxMjcxNzIwNzU5MDk0NjUwNjA_small.jpg"></e1-image-viewer> -->
+	<!-- <e1-image-viewer type="360mono" url="https://images.nvidia.com/ansel/images/ansel-images/YWR1bW15NTMyMTUxMjcxNzIwNzU5MDk0NjUwNjA_vr.jpg" preview="https://images.nvidia.com/ansel/images/ansel-images/YWR1bW15NTMyMTUxMjcxNzIwNzU5MDk0NjUwNjA_small.jpg"></e1-image-viewer> -->
 
 
 	<script>
-		// E1.services.demoService.init()
+		E1.services.demoService.init()
 		// console.log(E1)
 	</script>
 
@@ -85,7 +89,7 @@
 		 url="https://www.nvidia.com/en-us/geforce/shot-with-geforce" text="Holla" hastags="shotcalla" image="https://s3.amazonaws.com/swgf.nvidia.com/geforceimage/prod/174462196375355610/26/custom_thumbnail_1517808076926_2_in.jpg"></e1-social-buttons>
 	</div> -->
 
-	<canvas id="webgl-canvas" width="324" height="765"></canvas>
+	<!-- <canvas id="webgl-canvas" width="324" height="765"></canvas>
 	<script>
 	
 		/* global mat4, vec3, VRPanorama, WGLUStats, VRSamplesUtil */
@@ -305,7 +309,7 @@
 			}
 		})();
 	</script>
-	<div id="vr-sample-message-container" align="center" style="font-family: sans-serif; position: absolute; z-index: 999; left: 0px; top: 0px; right: 0px; margin: 0px; padding: 0px;"></div>
+	<div id="vr-sample-message-container" align="center" style="font-family: sans-serif; position: absolute; z-index: 999; left: 0px; top: 0px; right: 0px; margin: 0px; padding: 0px;"></div> -->
 </body>
 
 </html>
