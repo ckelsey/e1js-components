@@ -156,13 +156,11 @@ class RendererVR {
 
 	onContextLost(event) {
 		event.preventDefault();
-		console.log('WebGL Context Lost.');
 		this.gl = null;
 		this.panorama = null;
 	}
 
 	onContextRestored(event) {
-		console.log('WebGL Context Restored.');
 		this.init();
 	}
 
@@ -177,7 +175,6 @@ class RendererVR {
 		if (!this.gl) {
 			this.gl = this.webglCanvas.getContext("experimental-webgl", glAttribs);
 			if (!this.gl) {
-				console.log("Your browser does not support WebGL.");
 				return;
 			}
 		}
@@ -219,9 +216,7 @@ class RendererVR {
 		}, 500);
 	}
 
-	fullscreen(e) {
-		console.log("FOO screen");
-		
+	fullscreen(e) {		
 		this.data.instance.toggleFullscreen(e)
 		setTimeout(() => {
 			this.positionCanvas(this);
