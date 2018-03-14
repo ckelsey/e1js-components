@@ -3,7 +3,7 @@ import Utils from "./utils"
 
 class RendererVR {
 
-	constructor() {
+	constructor(data) {
 		var self = this
 
 		var resize = () => {
