@@ -218,22 +218,34 @@ class RendererVR {
 
 	fullscreen(e) {
 		this.data.instance.toggleFullscreen(e)
-
-		console.log("RE");
 		
 
 		window.setTimeout(() => {
 			window.requestAnimationFrame(() => {
 				this.positionCanvas(this);
-
 				window.setTimeout(() => {
-					console.log("RE2");
 					window.requestAnimationFrame(() => {
 						this.positionCanvas(this);
+						window.setTimeout(() => {
+							window.requestAnimationFrame(() => {
+								this.positionCanvas(this);
+								window.setTimeout(() => {
+									window.requestAnimationFrame(() => {
+										this.positionCanvas(this);
+										window.setTimeout(() => {
+											window.requestAnimationFrame(() => {
+												this.positionCanvas(this);
+
+											})
+										}, 100)
+									})
+								}, 100)
+							})
+						}, 100)
 					})
-				}, 1000)
+				}, 100)
 			})
-		}, 200)
+		}, 100)
 	}
 
 
