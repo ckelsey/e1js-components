@@ -57,34 +57,12 @@ class RendererVR {
 
 					this.run()
 
-					if (this.vrDisplay.capabilities.canPresent) {
-						// vrPresentButton = VRSamplesUtil.addButton("Enter VR", "E", "media/icons/cardboard64.png", onVRRequestPresent);
-					}
-
-					// For the benefit of automated testing. Safe to ignore.
-					if (this.vrDisplay.capabilities.canPresent) {
-						// this.webglCanvas.addEventListener("click", onVRRequestPresent, false);
-					}
-
-
-					this.window.addEventListener('vrdisplaypresentchange', this.onVRPresentChange.bind(this), false);
-					// this.window.addEventListener('vrdisplayactivate', onVRRequestPresent, false);
-					// this.window.addEventListener('vrdisplaydeactivate', onVRExitPresent, false);
-				} else {
-					// init(false);
-					// VRSamplesUtil.addInfo("WebVR supported, but no VRDisplays found.", 3000);
+					window.addEventListener('vrdisplaypresentchange', this.onVRPresentChange.bind(this), false);
+					// window.addEventListener('vrdisplayactivate', onVRRequestPresent, false);
+					// window.addEventListener('vrdisplaydeactivate', onVRExitPresent, false);
 				}
-			}, () => {
-				// VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
 			});
 		}
-		// else if (navigator.getVRDevices) {
-		// 	// init(false);
-		// 	// VRSamplesUtil.addError("Your browser supports WebVR but not the latest version. See <a href='http://webvr.info'>webvr.info</a> for more info.");
-		// } else {
-		// 	// init(false);
-		// 	// VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
-		// }
 	}
 
 	destroy() { }
@@ -92,13 +70,6 @@ class RendererVR {
 	run() {
 		if (this.img1) {
 			this.originalImage = this.img1
-			// this.onNormalScene()
-			// this.data.instance.createControls({
-			// 	fullscreen: this.fullscreen,
-			// 	onExitFullscreen: this.onExitFullscreen,
-			// 	vr: this.present,
-			// 	self: this
-			// })
 			this.hasLoadedControls = true
 			this.ready = true
 
