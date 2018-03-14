@@ -46,7 +46,45 @@ class RendererVR {
 
 		this.hasLoadedControls = false
 
-		this.run()
+		if (window.navigator.getVRDisplays) {
+			this.frameData = new window.VRFrameData();
+
+			window.navigator.getVRDisplays().then(function (displays) {
+				if (displays.length > 0) {
+					this.vrDisplay = displays[displays.length - 1];
+					this.vrDisplay.depthNear = 0.1;
+					this.vrDisplay.depthFar = 1024.0;
+
+					this.run()
+
+					if (this.vrDisplay.capabilities.canPresent) {
+						// vrPresentButton = VRSamplesUtil.addButton("Enter VR", "E", "media/icons/cardboard64.png", onVRRequestPresent);
+					}
+
+					// For the benefit of automated testing. Safe to ignore.
+					if (this.vrDisplay.capabilities.canPresent) {
+						// this.webglCanvas.addEventListener("click", onVRRequestPresent, false);
+					}
+
+
+					// this.window.addEventListener('vrdisplaypresentchange', onVRPresentChange, false);
+					// this.window.addEventListener('vrdisplayactivate', onVRRequestPresent, false);
+					// this.window.addEventListener('vrdisplaydeactivate', onVRExitPresent, false);
+				} else {
+					// init(false);
+					// VRSamplesUtil.addInfo("WebVR supported, but no VRDisplays found.", 3000);
+				}
+			}, function () {
+				// VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
+			});
+		} 
+		// else if (navigator.getVRDevices) {
+		// 	// init(false);
+		// 	// VRSamplesUtil.addError("Your browser supports WebVR but not the latest version. See <a href='http://webvr.info'>webvr.info</a> for more info.");
+		// } else {
+		// 	// init(false);
+		// 	// VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
+		// }
 	}
 
 	destroy(){}
@@ -147,7 +185,7 @@ class RendererVR {
 
 	onContextRestored(event) {
 		console.log('WebGL Context Restored.');
-		init();
+		this.init();
 	}
 
 	init() {
@@ -168,7 +206,7 @@ class RendererVR {
 		this.gl.enable(this.gl.DEPTH_TEST);
 		this.gl.enable(this.gl.CULL_FACE);
 
-		this.panorama = new VRPanorama(this.gl);
+		this.panorama = new window.VRPanorama(this.gl);
 		this.panorama.useImage(this.img1);
 
 		this.positionCanvas(this)
@@ -660,43 +698,6 @@ module.exports = RendererVR
 // }
 
 
-// if (navigator.getVRDisplays) {
-// 	frameData = new VRFrameData();
 
-// 	navigator.getVRDisplays().then(function (displays) {
-// 		if (displays.length > 0) {
-// 			vrDisplay = displays[displays.length - 1];
-// 			vrDisplay.depthNear = 0.1;
-// 			vrDisplay.depthFar = 1024.0;
-
-// 			init(true);
-
-// 			if (vrDisplay.capabilities.canPresent) {
-// 				// vrPresentButton = VRSamplesUtil.addButton("Enter VR", "E", "media/icons/cardboard64.png", onVRRequestPresent);
-// 			}
-
-// 			// For the benefit of automated testing. Safe to ignore.
-// 			if (vrDisplay.capabilities.canPresent) {
-// 				webglCanvas.addEventListener("click", onVRRequestPresent, false);
-// 			}
-
-
-// 			window.addEventListener('vrdisplaypresentchange', onVRPresentChange, false);
-// 			window.addEventListener('vrdisplayactivate', onVRRequestPresent, false);
-// 			window.addEventListener('vrdisplaydeactivate', onVRExitPresent, false);
-// 		} else {
-// 			init(false);
-// 			// VRSamplesUtil.addInfo("WebVR supported, but no VRDisplays found.", 3000);
-// 		}
-// 	}, function () {
-// 		// VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
-// 	});
-// } else if (navigator.getVRDevices) {
-// 	init(false);
-// 	// VRSamplesUtil.addError("Your browser supports WebVR but not the latest version. See <a href='http://webvr.info'>webvr.info</a> for more info.");
-// } else {
-// 	init(false);
-// 	// VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
-// }
 
 
