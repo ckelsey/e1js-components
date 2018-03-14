@@ -28,8 +28,8 @@ class RendererVR {
 		this.panorama2 = null
 
 		this.webglCanvas = window.document.createElement("canvas");
-		webglCanvas.addEventListener('webglcontextlost', this.onContextLost.bind(this), false);
-		webglCanvas.addEventListener('webglcontextrestored', this.onContextRestored.bind(this), false);
+		this.webglCanvas.addEventListener('webglcontextlost', this.onContextLost.bind(this), false);
+		this.webglCanvas.addEventListener('webglcontextrestored', this.onContextRestored.bind(this), false);
 		this.canvasWrapper.appendChild(this.webglCanvas)
 		this.webglCanvas.setAttribute("type", "vr")
 
