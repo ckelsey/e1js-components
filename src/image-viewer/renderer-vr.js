@@ -120,34 +120,41 @@ class RendererVR {
 			this.canvasWrapper.parentNode.style.width = "100%";
 			this.canvasWrapper.parentNode.style.paddingTop = ((9 / 16) * 100) + "%";
 
-			// if (this.vrDisplay.isPresenting) {
-			// 	this.onPresent()
-			// } else {
-			// 	this.onNormalScene();
-			// }
-
 			this.init()
 
-			// if (!this.hasLoadedControls) {
-			// 	this.data.instance.createControls({
-			// 		fullscreen: this.fullscreen,
-			// 		vr: this.present,
-			// 		self: this
-			// 	})
-			// 	this.hasLoadedControls = true
-			// 	this.ready = true
+			if (!this.hasLoadedControls) {
+				this.data.instance.createControls({
+					fullscreen: this.fullscreen,
+					vr: this.present,
+					self: this
+				})
 
-			// 	if (this.data.instance.onready && typeof this.data.instance.onready === `function`) {
-			// 		this.data.instance.onready()
-			// 	}
-			// }
+				this.hasLoadedControls = true
+			}
+
+			this.ready = true
+
+			if (this.data.instance.onready && typeof this.data.instance.onready === `function`) {
+				this.data.instance.onready()
+			}
 		}, (_img) => {
 			this.canvasWrapper.parentNode.style.display = "block";
 			this.canvasWrapper.parentNode.style.height = "0px";
 			this.canvasWrapper.parentNode.style.width = "100%";
 			this.canvasWrapper.parentNode.style.paddingTop = ((9 / 16) * 100) + "%";
+			
 			this.setImages(_img);
-			// this.onNormalScene()
+
+			this.data.instance.createControls({
+				fullscreen: this.fullscreen,
+				vr: this.present,
+				self: this
+			})
+			
+			this.hasLoadedControls = true
+			
+			this.init()
+
 		}, this.reject)
 	}
 
@@ -209,6 +216,9 @@ class RendererVR {
 		this.panorama = new window.VRPanorama(this.gl);
 		this.panorama.useImage(this.img1);
 
+		this.panorama2 = new window.VRPanorama(this.gl);
+		this.panorama2.useImage(this.img2);
+
 		this.positionCanvas(this)
 
 		window.requestAnimationFrame(() => {
@@ -216,10 +226,37 @@ class RendererVR {
 		});
 	}
 
+	present(self) {
+		self.vrDisplay.requestPresent([{ source: self.webglCanvas }]).then(() => {
+			self.onPresent();
+		});
+	}
+
+	onPresent() {
+		var btnWrapper = window.document.querySelector(".buttonWrapper")
+
+		if (btnWrapper) {
+			btnWrapper.parentElement.removeChild(btnWrapper)
+		}
+
+		this.canvasWrapper.parentNode.classList.add("fullscreen")
+
+		setTimeout(() => {
+			this.isPresenting = true;
+
+			this.positionCanvas(this);
+		}, 500);
+	}
+
+	fullscreen(e) {
+		this.data.instance.toggleFullscreen(e)
+		setTimeout(() => {
+			this.positionCanvas(this);
+		}, 200)
+	}
+
 
 	onAnimationFrame() {
-		console.log(this.gl, this.panorama, this.vrDisplay);
-
 		// do not attempt to render if there is no available WebGL context
 		if (!this.gl || !this.panorama) {
 			return;
