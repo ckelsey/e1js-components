@@ -38,7 +38,7 @@ class Collapse {
             this.check()
         })
 
-        this.next()
+        this.check()
     }
 
     check() {
