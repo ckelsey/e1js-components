@@ -43,7 +43,6 @@ class Edit {
         var save = ()=>{
             var value = this.el.querySelector(".edit-content").textContent
             value = (value ? value.trim() : ``)
-            value = value.map(char => char.charCodeAt(0) <= 127 ? char : '', value).join('')
 
             E1.setModel(null, `@E1EditService.editors.${this.editor.name}.editing`, false)
             E1.setModel(this.el, "content", value)
