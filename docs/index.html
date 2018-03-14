@@ -32,7 +32,7 @@
 
 	<script src="matrix.js"></script>
 	<script src="wglu.js"></script>
-	<script src="stats.js"></script>
+	<!-- <script src="stats.js"></script> -->
 	<script src="pano.js"></script>
 	<!-- <script src="utils.js"></script> -->
 	<script src="three.js"></script>
@@ -124,14 +124,14 @@
 			// WebGL setup.
 			var gl = null;
 			var panorama = null;
-			var stats = null;
+			// var stats = null;
 
 			function onContextLost(event) {
 				event.preventDefault();
 				console.log('WebGL Context Lost.');
 				gl = null;
 				panorama = null;
-				stats = null;
+				// stats = null;
 			}
 
 			function onContextRestored(event) {
@@ -163,9 +163,9 @@
 				panorama = new VRPanorama(gl);
 				panorama.setImage("https://images.nvidia.com/ansel/images/ansel-images/YWR1bW15NTMyMTUxMjcxNzIwNzU5MDk0NjUwNjA_vr.jpg");
 
-				var enablePerformanceMonitoring = WGLUUrl.getBool(
-					'enablePerformanceMonitoring', false);
-				stats = new WGLUStats(gl, enablePerformanceMonitoring);
+				// var enablePerformanceMonitoring = WGLUUrl.getBool(
+				// 	'enablePerformanceMonitoring', false);
+				// stats = new WGLUStats(gl, enablePerformanceMonitoring);
 
 				// Wait until we have a WebGL context to resize and start rendering.
 				window.addEventListener("resize", onResize, false);
@@ -278,10 +278,10 @@
 
 			function onAnimationFrame(t) {
 				// do not attempt to render if there is no available WebGL context
-				if (!gl || !stats || !panorama) {
+				if (!gl || !panorama) {
 					return;
 				}
-				stats.begin();
+				// stats.begin();
 
 				gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -308,7 +308,7 @@
 						gl.viewport(0, 0, webglCanvas.width, webglCanvas.height);
 						mat4.perspective(projectionMat, Math.PI * 0.4, webglCanvas.width / webglCanvas.height, 0.1, 1024.0);
 						panorama.render(projectionMat, viewMat);
-						stats.renderOrtho();
+						// stats.renderOrtho();
 					}
 				} else {
 					window.requestAnimationFrame(onAnimationFrame);
@@ -319,10 +319,10 @@
 					mat4.identity(viewMat);
 					panorama.render(projectionMat, viewMat);
 
-					stats.renderOrtho();
+					// stats.renderOrtho();
 				}
 
-				stats.end();
+				// stats.end();
 			}
 		})();
 	</script>
