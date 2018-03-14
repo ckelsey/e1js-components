@@ -205,6 +205,21 @@ gulp.task('publish', function (done) {
 						console.log(stderr);
 					})
 
+					exec('cp src/image-viewer/lib/wglu-url.js dist/wglu-url.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/stats.js dist/stats.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/utils.js dist/utils.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
 
 
 					exec('cp src/image-viewer/lib/matrix.js docs/matrix.js', function (err, stdout, stderr) {
@@ -228,6 +243,21 @@ gulp.task('publish', function (done) {
 					})
 
 					exec('cp src/image-viewer/lib/wglu.js docs/wglu.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/wglu-url.js docs/wglu-url.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/stats.js docs/stats.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
+					exec('cp src/image-viewer/lib/utils.js docs/utils.js', function (err, stdout, stderr) {
 						console.log(stdout);
 						console.log(stderr);
 					})

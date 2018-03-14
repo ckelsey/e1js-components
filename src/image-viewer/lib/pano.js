@@ -52,12 +52,12 @@ window.VRPanorama = (function () {
     var lonSegments = 40;
 
     // Create the vertices
-    for (var i=0; i <= latSegments; ++i) {
+    for (var i = 0; i <= latSegments; ++i) {
       var theta = i * Math.PI / latSegments;
       var sinTheta = Math.sin(theta);
       var cosTheta = Math.cos(theta);
 
-      for (var j=0; j <= lonSegments; ++j) {
+      for (var j = 0; j <= lonSegments; ++j) {
         var phi = j * 2 * Math.PI / lonSegments;
         var sinPhi = Math.sin(phi);
         var cosPhi = Math.cos(phi);
@@ -74,14 +74,14 @@ window.VRPanorama = (function () {
 
     // Create the indices
     for (var i = 0; i < latSegments; ++i) {
-      var offset0 = i * (lonSegments+1);
-      var offset1 = (i+1) * (lonSegments+1);
+      var offset0 = i * (lonSegments + 1);
+      var offset1 = (i + 1) * (lonSegments + 1);
       for (var j = 0; j < lonSegments; ++j) {
-        var index0 = offset0+j;
-        var index1 = offset1+j;
+        var index0 = offset0 + j;
+        var index1 = offset1 + j;
         panoIndices.push(
-          index0, index1, index0+1,
-          index1, index1+1, index0+1
+          index0, index1, index0 + 1,
+          index1, index1 + 1, index0 + 1
         );
       }
     }
@@ -100,13 +100,32 @@ window.VRPanorama = (function () {
     this.videoElement = null;
   };
 
+  Panorama.prototype.useImage = function (img) {
+    var gl = this.gl;
+    var self = this;
+    return new Promise(function (resolve, reject) {
+      self.imgElement = img;
+      self.videoElement = null;
+
+      gl.bindTexture(gl.TEXTURE_2D, self.texture);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
+
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+      resolve(self.imgElement);
+    })
+  }
+
   Panorama.prototype.setImage = function (url) {
     var gl = this.gl;
     var self = this;
 
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var img = new Image();
-      img.addEventListener('load', function() {
+      img.addEventListener('load', function () {
         self.imgElement = img;
         self.videoElement = null;
 
@@ -120,7 +139,7 @@ window.VRPanorama = (function () {
 
         resolve(self.imgElement);
       });
-      img.addEventListener('error', function(ev) {
+      img.addEventListener('error', function (ev) {
         console.error(ev.message);
         reject(ev.message);
       }, false);
@@ -129,33 +148,17 @@ window.VRPanorama = (function () {
     });
   };
 
-  Panorama.prototype.useImage = function (img) {
-    var gl = this.gl;
-    var self = this;
-    img.crossOrigin = 'anonymous';
-    self.imgElement = img;
-    self.videoElement = null;
-
-    gl.bindTexture(gl.TEXTURE_2D, self.texture);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
-
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  };
-
   Panorama.prototype.setVideo = function (url) {
     var gl = this.gl;
     var self = this;
 
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       var video = document.createElement('video');
-      video.addEventListener('canplay', function() {
+      video.addEventListener('canplay', function () {
         // Added "click to play" UI?
       });
 
-      video.addEventListener('playing', function() {
+      video.addEventListener('playing', function () {
         self.videoElement = video;
         self.imgElement = null;
 
@@ -170,30 +173,54 @@ window.VRPanorama = (function () {
         resolve(self.videoElement);
       });
 
-      video.addEventListener('error', function(ev) {
+      video.addEventListener('error', function (ev) {
         console.error(video.error);
         reject(video.error);
       }, false);
 
+      // Videos must be muted to play without a user gesture.
+      video.muted = true;
+
+      // These lines are required to play the video on iOS.
+      video.setAttribute("playsinline", "");
+      // This is for iOS 8 and 9 only, above line required for 10+.
+      video.setAttribute("webkit-playsinline", "");
+
       video.loop = true;
-      video.autoplay = true;
       video.crossOrigin = 'anonymous';
-      video.setAttribute('webkit-playsinline', '');
       video.src = url;
+
+      // As the video is never visible on the page, we must explicitly
+      // call play to start the video instead of being able to use
+      // autoplay attributes.
+      playVideo(video);
     });
   };
 
-  Panorama.prototype.play = function() {
+  // Start the video. If the video fails to start, alert the user.
+  Panorama.prototype.play = function () {
     if (this.videoElement)
-      this.videoElement.play();
+      playVideo(this.videoElement);
   };
 
-  Panorama.prototype.pause = function() {
+  function playVideo(video) {
+    let promise = video.play();
+    if (promise) {
+      promise.catch((err) => {
+        console.error(err);
+        VRSamplesUtil.addError("Video has failed to start", 3000)
+      });
+    } else {
+      console.error("videoElement.play does not support promise api");
+    }
+  };
+
+  Panorama.prototype.pause = function () {
     if (this.videoElement)
       this.videoElement.pause();
   };
 
-  Panorama.prototype.isPaused = function() {
+  Panorama.prototype.isPaused = function () {
     if (this.videoElement)
       return this.videoElement.paused;
     return false;
