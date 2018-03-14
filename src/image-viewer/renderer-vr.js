@@ -49,7 +49,7 @@ class RendererVR {
 		if (window.navigator.getVRDisplays) {
 			this.frameData = new window.VRFrameData();
 
-			window.navigator.getVRDisplays().then(function (displays) {
+			window.navigator.getVRDisplays().then((displays) => {
 				if (displays.length > 0) {
 					this.vrDisplay = displays[displays.length - 1];
 					this.vrDisplay.depthNear = 0.1;
@@ -74,10 +74,10 @@ class RendererVR {
 					// init(false);
 					// VRSamplesUtil.addInfo("WebVR supported, but no VRDisplays found.", 3000);
 				}
-			}, function () {
+			}, () => {
 				// VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
 			});
-		} 
+		}
 		// else if (navigator.getVRDevices) {
 		// 	// init(false);
 		// 	// VRSamplesUtil.addError("Your browser supports WebVR but not the latest version. See <a href='http://webvr.info'>webvr.info</a> for more info.");
@@ -87,9 +87,9 @@ class RendererVR {
 		// }
 	}
 
-	destroy(){}
+	destroy() { }
 
-	run(){
+	run() {
 		if (this.img1) {
 			this.originalImage = this.img1
 			// this.onNormalScene()
@@ -151,7 +151,7 @@ class RendererVR {
 		}, this.reject)
 	}
 
-	setImages(img){
+	setImages(img) {
 		this.ctxTop.canvas.width = this.ctxBottom.canvas.width = 4096;
 		this.ctxTop.canvas.height = this.ctxBottom.canvas.height = 2048;
 
@@ -219,7 +219,7 @@ class RendererVR {
 
 	onAnimationFrame() {
 		console.log(this.gl, this.panorama, this.vrDisplay);
-		
+
 		// do not attempt to render if there is no available WebGL context
 		if (!this.gl || !this.panorama) {
 			return;
@@ -228,7 +228,7 @@ class RendererVR {
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
 
 		if (this.vrDisplay) {
-			this.vrDisplay.requestAnimationFrame(()=>{
+			this.vrDisplay.requestAnimationFrame(() => {
 				this.onAnimationFrame()
 			});
 
