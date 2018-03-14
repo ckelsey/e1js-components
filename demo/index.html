@@ -52,12 +52,12 @@
 		<div id="main-content"></div>
 	</div>
 
-	
+
 
 
 	<!-- <e1-ui-recorder></e1-ui-recorder> -->
 
-	
+
 	<!-- <script src="image-renderer-lib.js"></script>
 
 	<script>
@@ -80,7 +80,7 @@
 
 
 	<script>
-		E1.services.demoService.init()
+		// E1.services.demoService.init()
 		// console.log(E1)
 	</script>
 
@@ -105,7 +105,7 @@
 
 	<canvas id="webgl-canvas" width="324" height="765"></canvas>
 	<script>
-	
+
 		/* global mat4, vec3, VRPanorama, WGLUStats, VRSamplesUtil */
 		(function () {
 			"use strict";
@@ -153,7 +153,7 @@
 				if (!gl) {
 					gl = webglCanvas.getContext("experimental-webgl", glAttribs);
 					if (!gl) {
-						VRSamplesUtil.addError("Your browser does not support WebGL.");
+						console.log("Your browser does not support WebGL.");
 						return;
 					}
 				}
@@ -184,7 +184,7 @@
 					if (err && err.message) {
 						errMsg += "<br/>" + err.message
 					}
-					VRSamplesUtil.addError(errMsg, 2000);
+					// VRSamplesUtil.addError(errMsg, 2000);
 				});
 			}
 
@@ -194,7 +194,7 @@
 
 				vrDisplay.exitPresent().then(function () {
 				}, function () {
-					VRSamplesUtil.addError("exitPresent failed.", 2000);
+					// VRSamplesUtil.addError("exitPresent failed.", 2000);
 				});
 			}
 
@@ -225,29 +225,32 @@
 
 						init(true);
 
-						if (vrDisplay.capabilities.canPresent)
+						if (vrDisplay.capabilities.canPresent){
 							vrPresentButton = VRSamplesUtil.addButton("Enter VR", "E", "media/icons/cardboard64.png", onVRRequestPresent);
-
+						}
+							
 						// For the benefit of automated testing. Safe to ignore.
-						if (vrDisplay.capabilities.canPresent && WGLUUrl.getBool('canvasClickPresents', false))
+						if (vrDisplay.capabilities.canPresent){
 							webglCanvas.addEventListener("click", onVRRequestPresent, false);
+						}
+							
 
 						window.addEventListener('vrdisplaypresentchange', onVRPresentChange, false);
 						window.addEventListener('vrdisplayactivate', onVRRequestPresent, false);
 						window.addEventListener('vrdisplaydeactivate', onVRExitPresent, false);
 					} else {
 						init(false);
-						VRSamplesUtil.addInfo("WebVR supported, but no VRDisplays found.", 3000);
+						// VRSamplesUtil.addInfo("WebVR supported, but no VRDisplays found.", 3000);
 					}
 				}, function () {
-					VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
+					// VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
 				});
 			} else if (navigator.getVRDevices) {
 				init(false);
-				VRSamplesUtil.addError("Your browser supports WebVR but not the latest version. See <a href='http://webvr.info'>webvr.info</a> for more info.");
+				// VRSamplesUtil.addError("Your browser supports WebVR but not the latest version. See <a href='http://webvr.info'>webvr.info</a> for more info.");
 			} else {
 				init(false);
-				VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
+				// VRSamplesUtil.addError("Your browser does not support WebVR. See <a href='http://webvr.info'>webvr.info</a> for assistance.");
 			}
 
 			function onResize() {
@@ -323,7 +326,7 @@
 			}
 		})();
 	</script>
-	<div id="vr-sample-message-container" align="center" style="font-family: sans-serif; position: absolute; z-index: 999; left: 0px; top: 0px; right: 0px; margin: 0px; padding: 0px;"></div>
+	<!-- <div id="vr-sample-message-container" align="center" style="font-family: sans-serif; position: absolute; z-index: 999; left: 0px; top: 0px; right: 0px; margin: 0px; padding: 0px;"></div> -->
 </body>
 
 </html>
