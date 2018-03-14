@@ -49,6 +49,8 @@ class RendererVR {
 		this.run()
 	}
 
+	destroy(){}
+
 	run(){
 		if (this.img1) {
 			this.originalImage = this.img1
