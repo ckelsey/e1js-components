@@ -67,7 +67,7 @@ class RendererVR {
 					}
 
 
-					// this.window.addEventListener('vrdisplaypresentchange', onVRPresentChange, false);
+					this.window.addEventListener('vrdisplaypresentchange', this.onVRPresentChange.bind(this), false);
 					// this.window.addEventListener('vrdisplayactivate', onVRRequestPresent, false);
 					// this.window.addEventListener('vrdisplaydeactivate', onVRExitPresent, false);
 				} else {
@@ -236,7 +236,7 @@ class RendererVR {
 		var btnWrapper = window.document.querySelector(".buttonWrapper")
 
 		if (btnWrapper) {
-			btnWrapper.parentElement.removeChild(btnWrapper)
+			btnWrapper.style.display = `none`
 		}
 
 		this.canvasWrapper.parentNode.classList.add("fullscreen")
@@ -315,7 +315,7 @@ class RendererVR {
 
 	positionCanvas(self) {
 
-		if (self.isPresenting) {
+		if (self.vrDisplay.isPresenting) {
 			var leftEye = self.vrDisplay.getEyeParameters("left");
 			var rightEye = self.vrDisplay.getEyeParameters("right");
 			self.webglCanvas.width = (Math.max(leftEye.renderWidth, rightEye.renderWidth) * 2);
@@ -338,18 +338,40 @@ class RendererVR {
 	onVRPresentChange() {
 		this.positionCanvas(this);
 
-		if (this.vrDisplay.isPresenting) {
-			if (this.vrDisplay.capabilities.hasExternalDisplay) {
-				// VRSamplesUtil.removeButton(vrPresentButton);
-				// vrPresentButton = VRSamplesUtil.addButton("Exit VR", "E", "media/icons/cardboard64.png", onVRExitPresent);
-			}
-		} else {
-			if (this.vrDisplay.capabilities.hasExternalDisplay) {
-				// VRSamplesUtil.removeButton(vrPresentButton);
-				// vrPresentButton = VRSamplesUtil.addButton("Enter VR", "E", "media/icons/cardboard64.png", onVRRequestPresent);
+		if (!this.vrDisplay.isPresenting) {
+			this.canvasWrapper.parentNode.classList.remove("fullscreen");
+
+			var btnWrapper = window.document.querySelector(".buttonWrapper")
+
+			if (btnWrapper) {
+				btnWrapper.style.display = `block`
 			}
 		}
 	}
+
+
+}
+
+module.exports = RendererVR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -683,30 +705,6 @@ class RendererVR {
 		}, this.reject)
 	}
 	*/
-}
-
-module.exports = RendererVR
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ================================
