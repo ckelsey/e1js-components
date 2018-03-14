@@ -40,19 +40,26 @@ class Edit {
             sel.addRange(range)
         })
 
+        var save = ()=>{
+            var value = this.el.querySelector(".edit-content").textContent
+            value = value ? value.trim().replace(/[^\x20-\x7E]+/g, '') : ``
+
+            E1.setModel(null, `@E1EditService.editors.${this.editor.name}.editing`, false)
+            E1.setModel(this.el, "content", value)
+            this.el.querySelector(".edit-content").removeAttribute("contenteditable")
+
+            if (typeof this.editor.save === "function") {
+                this.editor.save(value)
+            }
+
+            if (typeof this.editor.saveProp === "function") {
+                this.editor.saveProp(value)
+            }
+        }
+
         this.el.querySelector(".edit-content").addEventListener("keypress", (e) => {
             if (e.key && e.key.toLowerCase() === "enter") {
-                E1.setModel(null, `@E1EditService.editors.${this.editor.name}.editing`, false)
-                E1.setModel(this.el, "content", this.el.querySelector(".edit-content").textContent)
-                this.el.querySelector(".edit-content").removeAttribute("contenteditable")
-
-                if (typeof this.editor.save === "function") {
-                    this.editor.save(this.el.querySelector(".edit-content").textContent)
-                }
-
-                if (typeof this.editor.saveProp === "function") {
-                    this.editor.saveProp(this.el.querySelector(".edit-content").textContent)
-                }
+                save()
             }
         })
 
@@ -62,17 +69,7 @@ class Edit {
         })
 
         this.el.querySelector('e1-icon[type="check"]').addEventListener(method, () => {
-            E1.setModel(null, `@E1EditService.editors.${this.editor.name}.editing`, false)
-            E1.setModel(this.el, "content", this.el.querySelector(".edit-content").textContent)
-            this.el.querySelector(".edit-content").removeAttribute("contenteditable")
-
-            if (typeof this.editor.save === "function") {
-                this.editor.save(this.el.querySelector(".edit-content").textContent)
-            }
-
-            if (typeof this.editor.saveProp === "function") {
-                this.editor.saveProp(this.el.querySelector(".edit-content").textContent)
-            }
+            save()
         })
 
         this.el.querySelector('e1-icon[type="close"]').addEventListener(method, () => {
