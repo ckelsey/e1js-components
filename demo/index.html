@@ -15,8 +15,8 @@
 	<link rel="stylesheet" href="e1js-components.css" />
 
 	<!-- <script src="webvr.js"></script>
-	<script src="wglu-url.js"></script>
-	<script>
+	<script src="wglu-url.js"></script> -->
+	<!-- <script>
 		// Dynamically turn the polyfill on if requested by the query args.
 		var polyfill = new WebVRPolyfill({
 			// Ensures the polyfill is always active on mobile, due to providing
@@ -28,9 +28,9 @@
 			DIRTY_SUBMIT_FRAME_BINDINGS: true,
 			BUFFER_SCALE: 0.75,
 		});
-	</script>
+	</script> -->
 
-	<script src="matrix.js"></script>
+	<!-- <script src="matrix.js"></script>
 	<script src="wglu.js"></script>
 	<script src="stats.js"></script>
 	<script src="pano.js"></script>
@@ -59,6 +59,20 @@
 
 	
 	<script src="image-renderer-lib.js"></script>
+
+	<script>
+		// Dynamically turn the polyfill on if requested by the query args.
+		var polyfill = new WebVRPolyfill({
+			// Ensures the polyfill is always active on mobile, due to providing
+			// a polyfilled CardboardVRDisplay when no native API is available,
+			// and also polyfilling even when the native API is available, due to
+			// providing a CardboardVRDisplay when no native VRDisplays exist.
+			PROVIDE_MOBILE_VRDISPLAY: true,
+			// Polyfill optimizations
+			DIRTY_SUBMIT_FRAME_BINDINGS: true,
+			BUFFER_SCALE: 0.75,
+		});
+	</script>
 	<script src="e1js-components.js"></script>
 	<script src="demo.js"></script>
 
