@@ -101,6 +101,8 @@ class ImageRenderer {
 	}
 
 	toggleFullscreen() {
+
+		console.log("fullscreen", this.fullscreen)
 		
 		if (this.fullscreen) {
 			this.exitFullscreen()
