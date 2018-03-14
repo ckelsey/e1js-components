@@ -168,7 +168,7 @@ class RendererVR {
 		this.gl.enable(this.gl.DEPTH_TEST);
 		this.gl.enable(this.gl.CULL_FACE);
 
-		this.panorama = new VRPanorama(gl);
+		this.panorama = new VRPanorama(this.gl);
 		this.panorama.useImage(this.img1);
 
 		this.positionCanvas(this)
