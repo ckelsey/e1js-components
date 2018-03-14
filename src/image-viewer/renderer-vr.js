@@ -220,6 +220,8 @@ class RendererVR {
 	}
 
 	fullscreen(e) {
+		console.log("FOO screen");
+		
 		this.data.instance.toggleFullscreen(e)
 		setTimeout(() => {
 			this.positionCanvas(this);
