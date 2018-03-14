@@ -15,14 +15,11 @@ class E1Proximity {
 
         this.update()
 
-        var self = this
+        window.addEventListener(`resize`, () => {
+            this.check()
+        })
 
-        var next = () => {
-            self.check()
-            window.requestAnimationFrame(next)
-        }
-
-        next()
+        this.check()
     }
 
     check() {

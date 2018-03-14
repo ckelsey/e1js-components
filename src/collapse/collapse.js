@@ -29,19 +29,16 @@ class Collapse {
         this.el.innerHTML = ""
         this.el.appendChild(this.toggle)
         this.el.appendChild(this.content)
-
-        var self = this
         
         this.toggle.addEventListener("click", ()=>{
             this.el.classList.toggle("open")
         })
 
-        var next = () => {
-            self.check()
-            window.requestAnimationFrame(next)
-        }
+        window.addEventListener(`resize`, ()=>{
+            this.check()
+        })
 
-        next()
+        this.next()
     }
 
     check() {
