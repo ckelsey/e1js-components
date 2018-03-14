@@ -310,7 +310,7 @@ class RendererVR {
 
 	onVRPresentChange() {
 		this.positionCanvas(this);
-		
+
 		window.setTimeout(()=>{
 			window.requestAnimationFrame(()=>{
 				this.positionCanvas(this);
@@ -323,7 +323,7 @@ class RendererVR {
 			var btnWrapper = window.document.querySelector(".buttonWrapper")
 
 			if (btnWrapper) {
-				btnWrapper.style.display = `block`
+				btnWrapper.style.display = `flex`
 			}
 		}
 	}
