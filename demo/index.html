@@ -34,7 +34,7 @@
 	<script src="wglu.js"></script>
 	<script src="stats.js"></script>
 	<script src="pano.js"></script>
-	<script src="utils.js"></script>
+	<!-- <script src="utils.js"></script> -->
 	<script src="three.js"></script>
 </head>
 
@@ -203,13 +203,13 @@
 
 				if (vrDisplay.isPresenting) {
 					if (vrDisplay.capabilities.hasExternalDisplay) {
-						VRSamplesUtil.removeButton(vrPresentButton);
-						vrPresentButton = VRSamplesUtil.addButton("Exit VR", "E", "media/icons/cardboard64.png", onVRExitPresent);
+						// VRSamplesUtil.removeButton(vrPresentButton);
+						// vrPresentButton = VRSamplesUtil.addButton("Exit VR", "E", "media/icons/cardboard64.png", onVRExitPresent);
 					}
 				} else {
 					if (vrDisplay.capabilities.hasExternalDisplay) {
-						VRSamplesUtil.removeButton(vrPresentButton);
-						vrPresentButton = VRSamplesUtil.addButton("Enter VR", "E", "media/icons/cardboard64.png", onVRRequestPresent);
+						// VRSamplesUtil.removeButton(vrPresentButton);
+						// vrPresentButton = VRSamplesUtil.addButton("Enter VR", "E", "media/icons/cardboard64.png", onVRRequestPresent);
 					}
 				}
 			}
@@ -226,7 +226,7 @@
 						init(true);
 
 						if (vrDisplay.capabilities.canPresent){
-							vrPresentButton = VRSamplesUtil.addButton("Enter VR", "E", "media/icons/cardboard64.png", onVRRequestPresent);
+							// vrPresentButton = VRSamplesUtil.addButton("Enter VR", "E", "media/icons/cardboard64.png", onVRRequestPresent);
 						}
 							
 						// For the benefit of automated testing. Safe to ignore.
