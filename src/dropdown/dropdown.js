@@ -40,7 +40,12 @@ class Dropdown {
 				}, 380)
 			})
 		} else {
-			window.document.body.addEventListener("click", (e) => {
+			var method = `click`
+
+			if (/iPad|iPhone|iPod|Android/.test(window.navigator.userAgent)) {
+				method = "touchend"
+			}
+			window.document.body.addEventListener(method, (e) => {
 				clearTimeout(clickThrottle)
 				var target = e.path ? e.path[0] : e.originalTarget ? e.originalTarget : e.target
 
@@ -87,8 +92,13 @@ class Dropdown {
 				optionWrapper.setAttribute("option-key", key)
 
 				var clickThrottle = false
+				var method = `click`
 
-				optionWrapper.addEventListener("click", (e) => {
+				if (/iPad|iPhone|iPod|Android/.test(window.navigator.userAgent)) {
+					method = "touchend"
+				}
+
+				optionWrapper.addEventListener(method, (e) => {
 					clearTimeout(clickThrottle)
 
 					clickThrottle = setTimeout(() => {

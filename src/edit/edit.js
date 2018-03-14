@@ -21,7 +21,7 @@ class Edit {
         var method = "click"
 
         if (/iPad|iPhone|iPod|Android/.test(window.navigator.userAgent)) {
-            method = "touch"
+            method = "touchend"
         }
 
         this.el.querySelector(".edit-content").addEventListener("input", () => {
