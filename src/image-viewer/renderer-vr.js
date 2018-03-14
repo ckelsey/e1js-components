@@ -310,6 +310,12 @@ class RendererVR {
 
 	onVRPresentChange() {
 		this.positionCanvas(this);
+		
+		window.setTimeout(()=>{
+			window.requestAnimationFrame(()=>{
+				this.positionCanvas(this);
+			})
+		}, 500)
 
 		if (!this.vrDisplay.isPresenting) {
 			this.canvasWrapper.parentNode.classList.remove("fullscreen");
