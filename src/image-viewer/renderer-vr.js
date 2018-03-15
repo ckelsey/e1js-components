@@ -160,7 +160,7 @@ class RendererVR {
 		this.panorama = null;
 	}
 
-	onContextRestored(event) {
+	onContextRestored() {
 		this.init();
 	}
 

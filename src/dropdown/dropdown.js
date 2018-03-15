@@ -55,10 +55,12 @@ class Dropdown {
 					var container = this.el.querySelector(".dropdown-container")
 
 					try {
-						if (target === this.el.querySelector(".dropdown-list-label")) {
-							container.classList.toggle("mouseenter")
-						} else if (target !== this.el && !this.el.contains(target)) {
+						// if (target === this.el.querySelector(".dropdown-list-label")) {
+						// 	container.classList.toggle("mouseenter")
+						if (target !== this.el && !this.el.contains(target)) {
 							container.classList.remove("mouseenter")
+						}else{
+							container.classList.toggle("mouseenter")
 						}
 					} catch (e) { }
 
