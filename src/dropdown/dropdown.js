@@ -40,14 +40,16 @@ class Dropdown {
 				}, 380)
 			})
 		} else {
-			var method = `click`
+			var method = `touchend`
 
-			if (/iPad|iPhone|iPod|Android/.test(window.navigator.userAgent)) {
-				method = "touchend"
-			}
+			// if (/iPad|iPhone|iPod|Android/.test(window.navigator.userAgent)) {
+			// 	method = "touchend"
+			// }
 			window.document.body.addEventListener(method, (e) => {
 				clearTimeout(clickThrottle)
 				var target = e.path ? e.path[0] : e.originalTarget ? e.originalTarget : e.target
+
+				console.log(target)
 
 				clickThrottle = setTimeout(() => {
 					var container = this.el.querySelector(".dropdown-container")
