@@ -34,11 +34,16 @@ class Collapse {
             this.el.classList.toggle("open")
         })
 
-        window.addEventListener(`resize`, ()=>{
+        var check = ()=>{
             this.check()
-        })
+            window.requestAnimationFrame(() => {
+                check()
+            })
+        }
 
-        this.check()
+        window.requestAnimationFrame(()=>{
+            check()
+        })
     }
 
     check() {
