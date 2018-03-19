@@ -193,10 +193,10 @@ class RendererFlat {
 
 		var height = (this.image.height * (width / this.image.width))
 
-		if (height > this.cacheSize){
-			width = (height / this.cacheSize) * width
-			height = this.cacheSize
-		}
+		// if (height > this.cacheSize){
+		// 	width = (height / this.cacheSize) * width
+		// 	height = this.cacheSize
+		// }
 
 		var pCtx = window.document.createElement("canvas").getContext("2d")
 		pCtx.canvas.width = width
