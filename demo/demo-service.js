@@ -113,8 +113,8 @@ class DemoService {
             crop: false,
             options: [{
                 label: "Super resolution",
-                preview: "https://app.nvidia.com/geforce/geforceimage/prod/115786498684486592/1126/low_resolution_25_1521385478206_tw61.png",
-                url: "https://app.nvidia.com/geforce/geforceimage/prod/115786498684486592/1126/low_resolution_1521385478206_tw61.png",
+                preview: "https://s3.amazonaws.com/swgf.nvidia.com/geforceimage/prod/115786498684486592/1126/low_resolution_25_1521385478206_tw61.png",
+                url: "https://s3.amazonaws.com/swgf.nvidia.com/geforceimage/prod/115786498684486592/1126/low_resolution_1521385478206_tw61.png",
                 type: "Super resolution"
             }, {
                 label: "Screenshot",

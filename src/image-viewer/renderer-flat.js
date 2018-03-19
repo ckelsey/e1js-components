@@ -100,7 +100,7 @@ class RendererFlat {
 	}
 
 	doZoom(amount, self) {
-		amount = amount / 4
+		amount = amount / 2
 		var queueCount = 4
 
 		while (queueCount--) {
@@ -173,8 +173,8 @@ class RendererFlat {
 		return {
 			id: this.cacheId++,
 			canvas: this.proxyImg(this.cacheSize, allow3D),
-			width: this.cacheSize,
-			height: this.image.height * (this.cacheSize / this.image.width)
+			width: this.image.height > this.image.width ? (this.cacheSize / this.image.height) * this.image.width : this.cacheSize,
+			height: this.image.height > this.image.width ? this.cacheSize : this.image.height * (this.cacheSize / this.image.width)
 		}
 	}
 
@@ -193,10 +193,10 @@ class RendererFlat {
 
 		var height = (this.image.height * (width / this.image.width))
 
-		// if (height > this.cacheSize){
-		// 	width = (height / this.cacheSize) * width
-		// 	height = this.cacheSize
-		// }
+		if (height > width){
+			height = width
+			width = (width / this.image.height) * this.image.width
+		}
 
 		var pCtx = window.document.createElement("canvas").getContext("2d")
 		pCtx.canvas.width = width
