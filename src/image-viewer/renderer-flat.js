@@ -101,7 +101,7 @@ class RendererFlat {
 
 	doZoom(amount, self) {
 		amount = amount / 4
-		var queueCount = 8
+		var queueCount = 4
 
 		while (queueCount--) {
 			self.zoomQueue.push(amount / 8)
