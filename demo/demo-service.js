@@ -113,8 +113,8 @@ class DemoService {
             crop: false,
             options: [{
                 label: "Super resolution",
-                preview: "https://images.nvidia.com/ansel/images/ansel-images/Y2tsc3l0ZXN0ZXIyMTUwNzEyNjE4OTYzMjMzMTI1ODky_small.jpg",
-                url: "https://images.nvidia.com/ansel/images/ansel-images/Y2tsc3l0ZXN0ZXIyMTUwNzEyNjE4OTYzMjMzMTI1ODky_large.jpg",
+                preview: "https://app.nvidia.com/geforce/geforceimage/prod/115786498684486592/1126/low_resolution_25_1521385478206_tw61.png",
+                url: "https://app.nvidia.com/geforce/geforceimage/prod/115786498684486592/1126/low_resolution_1521385478206_tw61.png",
                 type: "Super resolution"
             }, {
                 label: "Screenshot",
