@@ -162,26 +162,10 @@ class Icon {
                 </svg>
                 `,
 
-            stumbleupon: `<span class="svg-bg""></span><svg style="fill:#eb4924;" type="stumbleupon" class="filled-svg" 
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                viewBox="0 0 12 12" style="enable-background:new 0 0 12 12;" xml:space="preserve">
-                <path class="st0" d="M6,0C2.7,0,0,2.7,0,6s2.7,6,6,6s6-2.7,6-6S9.3,0,6,0z M6,4.3c-0.1,0-0.2,0.1-0.3,0.1C5.6,4.5,5.5,4.6,5.6,4.7
-                v2.6c0,0.5-0.2,0.9-0.5,1.2C4.7,8.9,4.3,9,3.8,9.1c-0.5,0-0.9-0.2-1.3-0.5S2,7.8,2,7.3V6.2h1.4v1.1c0,0.1,0,0.2,0.1,0.3
-                c0.1,0.1,0.2,0.1,0.3,0.1c0.1,0,0.2,0,0.3-0.1c0.1-0.1,0.1-0.2,0.1-0.3V4.7c0-0.5,0.2-0.9,0.5-1.2C5.1,3.1,5.5,2.9,6,2.9
-                c0.5,0,0.9,0.2,1.3,0.5c0.3,0.3,0.5,0.7,0.5,1.2v0.6L7,5.5L6.4,5.2V4.7c0-0.1,0-0.2-0.1-0.3C6.2,4.3,6.1,4.3,6,4.3z M10,7.3
-                c0,0.5-0.2,0.9-0.5,1.3C9.1,8.9,8.7,9.1,8.2,9.1c-0.5,0-0.9-0.2-1.3-0.5S6.4,7.8,6.4,7.3V6.2L7,6.4l0.8-0.2v1.1c0,0.1,0,0.2,0.1,0.3
-                C8,7.7,8.1,7.7,8.2,7.7c0.1,0,0.2,0,0.3-0.1c0.1-0.1,0.1-0.2,0.1-0.3V6.2H10V7.3z"/>
-                </svg>`,
-
-            tumblr: `<span class="svg-bg""></span><svg style="fill:rgb(50, 80, 109);" type="tumblr" class="filled-svg" 
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" 
-                viewBox="0 0 12 12" style="enable-background:new 0 0 12 12;" xml:space="preserve">
-                <path class="st0" d="M6,0C2.7,0,0,2.7,0,6s2.7,6,6,6s6-2.7,6-6S9.3,0,6,0z M7.8,9C7.5,9.1,7.3,9.2,7,9.2S6.5,9.3,6.3,9.3
-                s-0.5,0-0.8-0.1C5.2,9.1,5.1,9,5,8.9C4.8,8.7,4.7,8.6,4.6,8.4C4.5,8.2,4.5,8,4.5,7.8V5.5H3.8V4.6C4,4.5,4.2,4.4,4.4,4.2
-                C4.7,4,4.8,3.9,4.9,3.7C5,3.5,5,3.2,5.1,2.8H6v1.7h1.5v1H6v1.7c0,0.4,0,0.6,0.1,0.7C6.1,8,6.2,8,6.3,8.1c0.2,0.1,0.3,0.1,0.5,0.1
-                c0.3,0,0.7-0.1,1-0.3V9z"/>
-                </svg>
-            `,
+            star: require("./templates/star._svg"),
+            star_outline: require("./templates/star_outline._svg"),
+            stumbleupon: require("./templates/stumbleupon._svg"),
+            tumblr: require("./templates/tumblr._svg"),
             twitter: '<span class="svg-bg""></span><svg style="fill:#55acef;" type="twitter" class="filled-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36 36"><g><path d="M18,0C8.1,0,0,8.1,0,18c0,9.9,8.1,18,18,18s18-8.1,18-18C36,8.1,27.9,0,18,0z M22.8,28.5c-0.7,0-4.8-0.1-5.9-0.1c-1,0-6.5-1.7-6.5-7.7c0-1.1,0-2.1,0-3.2c0-1,0-2,0-3c0-0.3,0-0.6,0-0.9c0-1.5-0.1-3.2,0.4-4.7c0.4-1.1,1.3-1.6,2.3-1.6c2.6,0,2.8,2.7,2.8,5.4h7.6c1.2,0,2.1,1.2,2.1,3.1c0,1.9-1.9,2.3-3,2.3h-6.8c0,1.1-0.1,2.1-0.1,2.6c0,1.2,0.5,2.5,3.4,2.5h4.1c1,0,2.5,0.8,2.5,2.9C25.7,28.3,23.6,28.5,22.8,28.5z"/></g></svg>',
             up: '<svg type="up" class="filled-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 166.3 166.3"><path transform="rotate(-90, 83, 83)" d="M137.1,83.1c0-1.5-3.5-4.9-3.5-4.9L112.4,57L56.8,1.5c-2-2-5.1-2-7.1,0L30.7,20.5c-2,2-2,5.1,0,7.1l55.5,55.5l-55.5,55.5 c-2,2-2,5.1,0,7.1l19.1,19.1c2,2,5.1,2,7.1,0l55.5-55.5l21.5-21.5C133.8,87.8,137.1,84.5,137.1,83.1z"/></svg>',
             upload: '<svg type="upload" class="filled-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000"><g><path d="M800.1,420.4c-28.6-140.9-151.1-247-300.1-247c-118.4,0-220.5,67.4-271.5,165.4C106,351,10,455.1,10,581.7c0,134.7,110.2,245,245,245h530.8c112.3,0,204.2-91.9,204.2-204.2C990,514.3,906.3,426.5,800.1,420.4z M565.3,540.8V696H434.7V540.8H295.8L500,336.7l204.2,204.2H565.3z"/></g></svg>',

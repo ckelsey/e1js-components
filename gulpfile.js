@@ -175,6 +175,11 @@ gulp.task('publish', function (done) {
 						colors: true
 					}));
 
+					exec('cp node_modules/e1js/dist/e1js.js docs/e1js.js', function (err, stdout, stderr) {
+						console.log(stdout);
+						console.log(stderr);
+					})
+
 					exec('cp demo/image-renderer-lib.js dist/image-renderer-lib.js', function (err, stdout, stderr) {
 						console.log(stdout);
 						console.log(stderr);
