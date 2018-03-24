@@ -245,7 +245,7 @@
 		}
 
 		setPositions(x1, x2, y1, y2) {
-			var minWidth = 200
+			var minWidth = 375
 			var minHeight = 200
 
 			var checkPositions = () => {
