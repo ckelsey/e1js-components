@@ -237,8 +237,18 @@
 						buttons.style.display = "none"
 					}
 
+					var lastWindowWidth = window.innerWidth
+					var lastWindowHeight = window.innerHeight
+
 					window.addEventListener(`resize`, ()=>{
-						self.setPositions(this.data.positions.x1, this.data.positions.x2, this.data.positions.y1, this.data.positions.y2)
+						var scale = window.innerHeight / lastWindowHeight
+						
+						if (Math.abs(lastWindowWidth - window.innerWidth) > Math.abs(lastWindowHeight - window.innerHeight)){
+							scale = window.innerWidth / lastWindowWidth
+						}
+						
+
+						self.setPositions(this.data.positions.x1 * scale, this.data.positions.x2 * scale, this.data.positions.y1 * scale, this.data.positions.y2 * scale)
 					})
 				} else {
 					window.requestAnimationFrame(initCropper)

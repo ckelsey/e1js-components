@@ -1,7 +1,7 @@
 {
 	"name": "e1js-components",
 	"description": "",
-	"version": "1.2.10",
+	"version": "1.2.11",
 	"main": "dist/index.js",
 	"homepage": "https://ckelsey.github.io/e1js-components/",
 	"repository": {
