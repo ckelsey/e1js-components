@@ -247,6 +247,8 @@
 							scale = window.innerWidth / lastWindowWidth
 						}
 						
+						lastWindowWidth = window.innerWidth
+						lastWindowHeight = window.innerHeight
 
 						self.setPositions(this.data.positions.x1 * scale, this.data.positions.x2 * scale, this.data.positions.y1 * scale, this.data.positions.y2 * scale)
 					})
