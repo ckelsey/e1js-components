@@ -236,6 +236,10 @@
 					if (buttons) {
 						buttons.style.display = "none"
 					}
+
+					window.addEventListener(`resize`, ()=>{
+						self.setPositions(this.data.positions.x1, this.data.positions.x2, this.data.positions.y1, this.data.positions.y2)
+					})
 				} else {
 					window.requestAnimationFrame(initCropper)
 				}
