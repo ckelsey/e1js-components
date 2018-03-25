@@ -1,4 +1,16 @@
-<table>
+<svg width="100%" height="100%">
+    <defs>
+        <mask id="Mask" width="375" height="200">
+            <rect x="0" y="0" width="100%" height="100%" style="fill: white;"></rect>
+            <rect x="0" y="0" width="375" height="200" style="fill: black;" id="maskInner"></rect>
+        </mask>
+    </defs>
+    <rect width="100%" height="100%" style="fill:black;fill-opacity: .5;" mask="url(#Mask)"></rect>
+    <rect x="0" y="0" width="375" height="200" style="fill: transparent;stroke: #aaa;stroke-width: 2px;stroke-dasharray: 4;pointer-events: all !important;" id="maskUpper"></rect>
+</svg>
+
+
+<!-- <table>
     <tr>
         <td></td>
         <td style="width:10px;"></td>
@@ -50,4 +62,4 @@
         <td></td>
         <td></td>
     </tr>
-</table>
+</table> -->

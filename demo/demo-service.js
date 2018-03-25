@@ -110,7 +110,7 @@ class DemoService {
             type: "",
             url: "",
             preview: "",
-            crop: false,
+            crop: true,
             options: [{
                 label: "Super resolution",
                 preview: "https://s3.amazonaws.com/swgf.nvidia.com/geforceimage/prod/115786498684486592/1126/low_resolution_25_1521385478206_tw61.png",
