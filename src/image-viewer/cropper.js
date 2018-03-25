@@ -220,14 +220,24 @@
 
 				if (this.canvas && stats.ready) {
 					var canvasBox = this.canvas.getBoundingClientRect()
-					var x = canvasBox.width / 4
-					var y = canvasBox.height / 4
+					// var x = canvasBox.width / 4
+					// var y = canvasBox.height / 4
+
+					// this.setPositions(
+					// 	x,
+					// 	x + x + x,
+					// 	y,
+					// 	y + y + y
+					// )
+
+					var x = (canvasBox.width - 375) / 2
+					var y = (canvasBox.height - 200) / 2
 
 					this.setPositions(
 						x,
-						x + x + x,
+						x + 375,
 						y,
-						y + y + y
+						y + 200
 					)
 
 					this.container.classList.add("active")
@@ -265,40 +275,40 @@
 			var minHeight = 200
 
 			var checkPositions = () => {
-				if (x1 < 5) {
-					x1 = 5
+				if (x1 < 0) {
+					x1 = 0
 				}
 
-				if (x2 > this.container.offsetWidth - 5) {
-					x2 = this.container.offsetWidth - 5
+				if (x2 > this.container.offsetWidth) {
+					x2 = this.container.offsetWidth
 				}
 
-				if (y1 < 5) {
-					y1 = 5
+				if (y1 < 0) {
+					y1 = 0
 				}
 
-				if (y2 > this.container.offsetHeight - 5) {
-					y2 = this.container.offsetHeight - 5
+				if (y2 > this.container.offsetHeight) {
+					y2 = this.container.offsetHeight
 				}
 			}
 
 			checkPositions()
 
-			if (minWidth && x2 - x1 < minWidth) {
+			if (x2 - x1 < minWidth) {
 				x2 = x1 + minWidth
 
-				if (x2 > this.container.offsetWidth - 5) {
-					x2 = this.container.offsetWidth - 5
-					x1 = (this.container.offsetWidth - 5) - minWidth
+				if (x2 > this.container.offsetWidth) {
+					x2 = this.container.offsetWidth
+					x1 = (this.container.offsetWidth) - minWidth
 				}
 			}
 
-			if (minHeight && y2 - y1 < minHeight) {
+			if (y2 - y1 < minHeight) {
 				y2 = y1 + minHeight
 
-				if (y2 > this.container.offsetHeight - 5) {
-					y2 = this.container.offsetHeight - 5
-					y1 = y2 - minHeight > 5 ? y2 - minHeight : 5
+				if (y2 > this.container.offsetHeight) {
+					y2 = this.container.offsetHeight
+					y1 = y2 - minHeight > 0 ? y2 - minHeight : 0
 				}
 			}
 
