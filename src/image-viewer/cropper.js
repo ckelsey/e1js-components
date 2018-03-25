@@ -193,6 +193,13 @@ class Cropper {
 	}
 
 	setPositions(x, y, w, h, force) {
+		var mask = window.document.getElementById(`maskInner`)
+		var maskUpper = window.document.getElementById(`maskUpper`)
+
+		if(!mask && !maskUpper){
+			return
+		}
+
 		var box = {
 			width: this.container.offsetWidth,
 			height: this.container.offsetHeight
@@ -260,18 +267,19 @@ class Cropper {
 		this.positions.w = w
 		this.positions.h = h
 
+		if (mask){
+			mask.setAttribute(`x`, x)
+			mask.setAttribute(`y`, y)
+			mask.setAttribute(`width`, w)
+			mask.setAttribute(`height`, h)
+		}
 
-		var mask = window.document.getElementById(`maskInner`)
-		mask.setAttribute(`x`, x)
-		mask.setAttribute(`y`, y)
-		mask.setAttribute(`width`, w)
-		mask.setAttribute(`height`, h)
-
-		var maskUpper = window.document.getElementById(`maskUpper`)
-		maskUpper.setAttribute(`x`, x)
-		maskUpper.setAttribute(`y`, y)
-		maskUpper.setAttribute(`width`, w)
-		maskUpper.setAttribute(`height`, h)
+		if (maskUpper){
+			maskUpper.setAttribute(`x`, x)
+			maskUpper.setAttribute(`y`, y)
+			maskUpper.setAttribute(`width`, w)
+			maskUpper.setAttribute(`height`, h)
+		}
 	}
 
 	createHtml() {
