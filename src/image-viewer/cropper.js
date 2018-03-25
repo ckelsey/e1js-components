@@ -273,22 +273,23 @@
 		setPositions(x1, x2, y1, y2) {
 			var minWidth = 375
 			var minHeight = 200
+			var box = this.container.getBoundingClientRect()
 
 			var checkPositions = () => {
 				if (x1 < 0) {
 					x1 = 0
 				}
 
-				if (x2 > this.container.offsetWidth) {
-					x2 = this.container.offsetWidth
+				if (x2 > box.width) {
+					x2 = box.width
 				}
 
 				if (y1 < 0) {
 					y1 = 0
 				}
 
-				if (y2 > this.container.offsetHeight) {
-					y2 = this.container.offsetHeight
+				if (y2 > box.height) {
+					y2 = box.height
 				}
 			}
 
@@ -297,30 +298,32 @@
 			if (x2 - x1 < minWidth) {
 				x2 = x1 + minWidth
 
-				if (x2 > this.container.offsetWidth) {
-					x2 = this.container.offsetWidth
-					x1 = (this.container.offsetWidth) - minWidth
+				if (x2 > box.width) {
+					x2 = box.width
+					x1 = box.width - minWidth
 				}
 			}
 
 			if (y2 - y1 < minHeight) {
 				y2 = y1 + minHeight
 
-				if (y2 > this.container.offsetHeight) {
-					y2 = this.container.offsetHeight
-					y1 = y2 - minHeight > 0 ? y2 - minHeight : 0
+				if (y2 > box.height) {
+					y2 = box.height
+					y1 = box.height - minHeight
 				}
 			}
+
+			checkPositions()
 
 			this.data.positions.x1 = x1
 			this.data.positions.x2 = x2
 			this.data.positions.y1 = y1
 			this.data.positions.y2 = y2
 
-			this.container.querySelector("#north-space").style.height = ((this.data.positions.y1 / this.container.offsetHeight) * 100) + "%"
-			this.container.querySelector("#south-space").style.height = (((this.container.offsetHeight - this.data.positions.y2) / this.container.offsetHeight) * 100) + "%"
-			this.container.querySelector("#west-space").style.width = ((this.data.positions.x1 / this.container.offsetWidth) * 100) + "%"
-			this.container.querySelector("#east-space").style.width = (((this.container.offsetWidth - this.data.positions.x2) / this.container.offsetWidth) * 100) + "%"
+			this.container.querySelector("#north-space").style.height = ((this.data.positions.y1 / box.height) * 100) + "%"
+			this.container.querySelector("#south-space").style.height = (((box.height - this.data.positions.y2) / box.height) * 100) + "%"
+			this.container.querySelector("#west-space").style.width = ((this.data.positions.x1 / box.width) * 100) + "%"
+			this.container.querySelector("#east-space").style.width = (((box.width - this.data.positions.x2) / box.width) * 100) + "%"
 
 			this.onUpdateCallbacks.forEach((cb) => {
 				cb(this.getCoordinates())
