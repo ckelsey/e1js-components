@@ -130,6 +130,7 @@ e1-image-viewer div.buttonWrapper {
 
 #crop-positioner.active {
 	opacity: 1;
+	box-shadow: inset 0px 0px 3px rgba(0, 0, 0, .7);
 }
 
 #crop-positioner table {
