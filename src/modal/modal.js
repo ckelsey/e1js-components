@@ -30,9 +30,10 @@ class Modal {
         var modal = this.el.querySelector(".modal")
         var modalContent = modal.querySelector(".modal-content")
         var active = E1.getModel(this.el, "active")
+        var clss = E1.getModel(this.el, `clss`)
 
-        if(E1.getModel(this.el, `clss`)){
-            modal.classList.add(E1.getModel(this.el, `clss`))
+        if (clss){
+            modal.classList.add(clss)
         }else{
             modal.className = `modal`
         }
