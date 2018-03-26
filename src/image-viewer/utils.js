@@ -16,19 +16,19 @@ class ImageUtils {
 	}
 
 	initImages(data, mainCB, prevCB, errCB) {
-		var progressBarWrapper = window.document.createElement("div")
-		progressBarWrapper.classList.add(`progress-wrapper`)
+		// var progressBarWrapper = window.document.createElement("div")
+		// progressBarWrapper.classList.add(`progress-wrapper`)
 
-		var progressBar = window.document.createElement("e1-progress");
-		progressBar.setAttribute(`type`, `circle`)
-		progressBar.setAttribute(`progress`, `@ProgressService.progress`)
-		progressBarWrapper.appendChild(progressBar)
-		data.element.appendChild(progressBarWrapper);
+		// var progressBar = window.document.createElement("e1-progress");
+		// progressBar.setAttribute(`type`, `circle`)
+		// progressBar.setAttribute(`progress`, `@ProgressService.progress`)
+		// progressBarWrapper.appendChild(progressBar)
+		// data.element.appendChild(progressBarWrapper);
 
 		var loadMain = () => {
 			this.loadImage(data.url,
 				(mainimg) => {
-					progressBar.style.opacity = 0;
+					// progressBar.style.opacity = 0;
 
 					mainCB(mainimg)
 
@@ -42,7 +42,7 @@ class ImageUtils {
 					data.instance.trigger("statsUpdate", data.instance.stats)
 				},
 				(err) => {
-					progressBar.style.opacity = 0;
+					// progressBar.style.opacity = 0;
 
 					if (errCB) {
 						errCB(err)
