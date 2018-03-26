@@ -19,6 +19,7 @@ class Modal {
 
         closeButton.addEventListener("click", () => {
             E1.setModel(this.el, "active", false)
+            E1.setModel(this.el, "clss", ``)
         }, false)
 
         this.update()
@@ -29,6 +30,12 @@ class Modal {
         var modal = this.el.querySelector(".modal")
         var modalContent = modal.querySelector(".modal-content")
         var active = E1.getModel(this.el, "active")
+
+        if(E1.getModel(this.el, `clss`)){
+            modal.classList.add(E1.getModel(this.el, `clss`))
+        }else{
+            modal.className = `modal`
+        }
 
         if (active && active.toString() === 'true') {
             modalContent.innerHTML = ""
