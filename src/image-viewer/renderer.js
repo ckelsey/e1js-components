@@ -70,8 +70,8 @@ class ImageRenderer {
 	}
 
 	exitFullscreen() {
-		var canvasWrapper = this.data.element;
-		canvasWrapper.parentNode.classList.remove("fullscreen");
+		var canvasWrapper = this.data.wrapper;
+		canvasWrapper.classList.remove("fullscreen");
 
 		if (window.document.exitFullscreen) {
 			window.document.exitFullscreen();
@@ -86,8 +86,8 @@ class ImageRenderer {
 
 	enterFullscreen() {
 		
-		var canvasWrapper = this.data.element;
-		canvasWrapper.parentNode.classList.add("fullscreen");
+		var canvasWrapper = this.data.wrapper;
+		canvasWrapper.classList.add("fullscreen");
 
 		if (canvasWrapper.requestFullscreen) {
 			canvasWrapper.requestFullscreen();

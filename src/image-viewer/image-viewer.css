@@ -26,6 +26,7 @@ e1-image-viewer.fullscreen{
 	top: 0px;
 	left: 0px;
 	height: 100% !important;
+	max-height: 100vh !important;
 	width: 100% !important;
 	z-index: 99999;
 }

@@ -17,7 +17,8 @@ class E1ImageViewer {
             preview: E1.getModel(this.el, "preview") || undefined,
             type: E1.getModel(this.el, "type") || undefined,
             crop: E1.getModel(this.el, "crop") || undefined,
-            element: this.el.querySelector(".image-renderer")
+            element: this.el.querySelector(".image-renderer"),
+            wrapper: this.el
         }
 
         if (data.url === this.data.url &&
