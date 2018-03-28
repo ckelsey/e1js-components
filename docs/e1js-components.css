@@ -535,6 +535,7 @@ e1-modal .modal .modal-wrapper .modal-close:hover {
 	background-position: 50% 50%;
 	user-select: none;
 	z-index: 1;
+	overflow: hidden;
 }
 
 e1-image-viewer * {

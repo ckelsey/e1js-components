@@ -103,21 +103,24 @@ class RendererFlat {
 		amount = amount / 2
 		var queueCount = 4
 
-		while (queueCount--) {
-			self.zoomQueue.push(amount / 8)
-		}
+		self.setZoom(amount)
+		self.setTransforms()
 
-		var runZoom = () => {
-			window.requestAnimationFrame(() => {
-				if (self.zoomQueue.length) {
-					self.setZoom(self.zoomQueue.shift())
-					self.setTransforms()
-					runZoom()
-				}
-			})
-		}
+		// while (queueCount--) {
+		// 	self.zoomQueue.push(amount / 8)
+		// }
 
-		runZoom()
+		// var runZoom = () => {
+		// 	window.requestAnimationFrame(() => {
+		// 		if (self.zoomQueue.length) {
+		// 			self.setZoom(self.zoomQueue.shift())
+		// 			self.setTransforms()
+		// 			runZoom()
+		// 		}
+		// 	})
+		// }
+
+		// runZoom()
 	}
 
 	toggleVr() {

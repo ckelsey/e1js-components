@@ -7,8 +7,8 @@
     <button e1-if="@demoService.image.crop === true" onclick="document.querySelector('e1-image-viewer').downloadScreenshot()">Take screenshot</button>
 </div>
 <p>&nbsp;</p>
-<div demo-el>
-    <e1-image-viewer type="@demoService.image.type" url="@demoService.image.url" preview="@demoService.image.preview" crop="@demoService.image.crop"></e1-image-viewer>
+<div demo-el style="margin: auto; min-height: 60px; max-height: 70vh; width: 100%; height: 100%;">
+    <e1-image-viewer style="max-height: 70vh;" type="@demoService.image.type" url="@demoService.image.url" preview="@demoService.image.preview" crop="@demoService.image.crop"></e1-image-viewer>
 </div>
 <div class="box">
     <h3>Markup</h3>
