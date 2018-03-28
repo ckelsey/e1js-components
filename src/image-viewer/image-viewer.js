@@ -6,7 +6,7 @@ class E1ImageViewer {
         this.el = el
         this.update = this.update
         this.data = {}
-        this.el.appendChild(E1.cleanHtml(`<span class="image-renderer loading"></span>`))
+        this.el.appendChild(E1.cleanHtml(`<span class="image-renderer-outer"><span class="image-renderer loading"></span></span>`))
         this.update()
     }
 

@@ -193,10 +193,13 @@ class Cropper {
 	}
 
 	setPositions(x, y, w, h, force) {
+		var cropper = window.document.getElementById(`crop-positioner`)
+		var svg = window.document.querySelector(`#crop-positioner svg`)
 		var mask = window.document.getElementById(`maskInner`)
 		var maskUpper = window.document.getElementById(`maskUpper`)
+		var maskLower = window.document.getElementById(`maskLower`)
 
-		if(!mask && !maskUpper){
+		if (!mask && !maskUpper & !maskLower){
 			return
 		}
 
@@ -279,6 +282,11 @@ class Cropper {
 			maskUpper.setAttribute(`y`, y)
 			maskUpper.setAttribute(`width`, w)
 			maskUpper.setAttribute(`height`, h)
+		}
+
+		if (cropper && svg & maskLower){
+			maskLower.style.width = svg.style.width = Math.ceil(cropper.offsetWidth)
+			maskLower.style.height = svg.style.height = Math.ceil(cropper.offsetHeight)
 		}
 	}
 
