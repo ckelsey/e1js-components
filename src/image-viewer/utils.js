@@ -13,6 +13,37 @@ E1.registerService("ProgressService", new ProgressService())
 class ImageUtils {
 	constructor() {
 		this.loadImage = this.loadImage
+
+		var ctx = window.document.createElement(`canvas`).getContext(`webgl`)
+
+		if (!ctx) {
+			ctx = window.document.createElement(`canvas`).getContext(`experimental-webgl`)
+		}
+
+		this.maxSize = Math.min(6000, ctx.getParameter(ctx.MAX_TEXTURE_SIZE))
+	}
+
+	maxedOutScale(w, h) {
+		var _w = w
+
+		if (w * h * 4 > this.maxSize * this.maxSize * 4) {
+			var scale = Math.min(1, (this.maxSize * this.maxSize * 4) / (w * h * 4))
+
+			w = w * scale
+			h = h * scale
+		}
+
+		if (w > this.maxSize) {
+			h = h * (this.maxSize / w)
+			w = this.maxSize
+		}
+
+		if (h > this.maxSize) {
+			w = w * (this.maxSize / h)
+			h = this.maxSize
+		}
+
+		return Math.min(1, w / _w)
 	}
 
 	initImages(data, mainCB, prevCB, errCB) {
@@ -67,7 +98,7 @@ class ImageUtils {
 				data.instance.stats.previewProgress = prog
 				data.instance.trigger("statsUpdate", data.instance.stats)
 			}, () => {
-				if (data.instance.previewReady && typeof data.instance.previewReady === `function`){
+				if (data.instance.previewReady && typeof data.instance.previewReady === `function`) {
 					data.instance.previewReady()
 				}
 				loadMain()

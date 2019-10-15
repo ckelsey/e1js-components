@@ -25,7 +25,7 @@ class RendererFlat {
 		this.is3D = data.type && data.type.toLowerCase().indexOf("stereo") > -1
 		this.isMobile = /iPad|iPhone|iPod|Android/.test(window.navigator.userAgent)
 		this.cache = {}
-		this.cacheSize = this.isMobile ? 4000 : 6000
+		this.cacheSize = this.isMobile ? 3000 : 6000
 		this.cacheId = 0
 		this.previousCache = null
 		this.originalImage = {}
@@ -101,7 +101,7 @@ class RendererFlat {
 
 	doZoom(amount, self) {
 		amount = amount / 2
-		var queueCount = 4
+		// var queueCount = 4
 
 		self.setZoom(amount)
 		self.setTransforms()
@@ -155,9 +155,9 @@ class RendererFlat {
 		}, 200)
 	}
 
-	toggleFullscreen() {		
+	toggleFullscreen() {
 		this.data.instance.toggleFullscreen();
-		
+
 		window.setTimeout(() => {
 			this.setTransforms()
 		}, 200)
@@ -173,11 +173,13 @@ class RendererFlat {
 	}
 
 	setCache(allow3D) {
+		var proxy = this.proxyImg(allow3D)
+
 		return {
 			id: this.cacheId++,
-			canvas: this.proxyImg(this.cacheSize, allow3D),
-			width: this.image.height > this.image.width ? (this.cacheSize / this.image.height) * this.image.width : this.cacheSize,
-			height: this.image.height > this.image.width ? this.cacheSize : this.image.height * (this.cacheSize / this.image.width)
+			canvas: proxy,
+			width: proxy.width,
+			height: proxy.height
 		}
 	}
 
@@ -189,17 +191,22 @@ class RendererFlat {
 		return Math.min(this.canvasWrapper.offsetWidth / this.activeCache.width, this.canvasWrapper.offsetHeight / this.activeCache.height) * (this.data.type === "Super resolution" ? 10 : 5)
 	}
 
-	proxyImg(width, allow3D) {
+	proxyImg(allow3D) {
 		if (this.is3D && !allow3D) {
 			this.image.width = this.image.width / 2
 		}
 
-		var height = (this.image.height * (width / this.image.width))
+		var scale = Utils.maxedOutScale(this.image.width, this.image.height)
+		console.log(scale)
+		var height = scale * this.image.height
+		var width = scale * this.image.width
 
-		if (height > width){
-			height = width
-			width = (width / this.image.height) * this.image.width
-		}
+		// var height = (this.image.height * (width / this.image.width))
+
+		// if (height > width) {
+		// 	height = width
+		// 	width = (width / this.image.height) * this.image.width
+		// }
 
 		var pCtx = window.document.createElement("canvas").getContext("2d")
 		pCtx.canvas.width = width

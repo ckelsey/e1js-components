@@ -5,8 +5,6 @@ class E1SocialButtons {
         this.el = el
         this.update = this.update
 
-        this.el.innerHTML = '<div class="share"></div>'
-
         this.update()
     }
 
@@ -15,11 +13,13 @@ class E1SocialButtons {
     }
 
     update() {
+        this.el.innerHTML = ''
         var components = E1.getModel(this.el, "components")
         var url = encodeURIComponent(E1.getModel(this.el, "url"))
         var text = E1.getModel(this.el, "text")
         var hashtags = E1.getModel(this.el, "hashtags")
         var image = encodeURIComponent(E1.getModel(this.el, "image", ""))
+        var click = this.el.getAttribute(`click`) ? this.el.getAttribute(`click`) : ``
 
         if (url.substring(0, url.length - 3) === `%3D` || url.substring(0, url.length - 5) === `%253D`) {
             url = url + `nd`
@@ -33,10 +33,12 @@ class E1SocialButtons {
             components = components.split(",").map(function (component) { return component.trim() })
         }
 
+
+
         var html = '<div class="share">'
 
         var generate = (type, onclick) => {
-            html += '<div class="share-button ' + type + '"><a class="icon-wrapper" onclick="' + onclick + '"><e1-icon type="' + type + '"></e1-icon></a></div>'
+            html += '<div class="share-button ' + type + '"><a class="icon-wrapper" onclick="' + onclick + '"><e1-icon type="' + type + '" onclick="' + click + '"></e1-icon></a></div>'
         }
 
         components.forEach((component) => {
